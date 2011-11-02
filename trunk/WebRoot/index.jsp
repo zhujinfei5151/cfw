@@ -1,4 +1,4 @@
 <%
-String redirectPath = request.getContextPath()+"/welcome.action";
+String redirectPath = request.getContextPath()+"/index/welcome.action";
 response.sendRedirect(redirectPath);
 %>
