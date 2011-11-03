@@ -9,3 +9,4 @@ String basePath = request.getScheme()+"://"+request.getServerName()+":"+request.
 <link rel="stylesheet" type="text/css" href="resources/css/left-tree.css">
 <link rel="stylesheet" type="text/css" href="resources/css/menu.css">
 <script type="text/javascript" src="frame/ExtJs/ext-all-debug.js"></script>
+<script type="text/javascript" src="Ext/org/cfw/common/common.js"></script>
