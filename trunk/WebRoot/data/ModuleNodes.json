@@ -1,0 +1,7 @@
+{
+    success: true,
+    nodes: [
+        {text : '计算方案', leaf : true, url : 'http://www.baidu.com',iconCls:'POB_CUSTOMER'},
+        {text : '通道设置', leaf : false, url : 'demo/channel.jsp',iconCls:'POB_TAIQU'}
+    ]
+}

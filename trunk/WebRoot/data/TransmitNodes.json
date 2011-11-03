@@ -1,0 +1,7 @@
+{
+    success: true,
+    nodes: [
+        {text : '市局', leaf : false, url : 'demo/channel.jsp',iconCls:'POB_BUREAU'},
+        {text : '分局', leaf : true, url : 'demo/calcScheme.jsp',iconCls:'POB_SUBSTATION'}
+    ]
+}
