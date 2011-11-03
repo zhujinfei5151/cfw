@@ -32,6 +32,11 @@ function init() {
 }
 
 function loadMenu() {
+	var menuStore = new cfw.store.MenuStore();
+	menuStore.load({callback:onLoadMenu});
+}
+
+function onLoadMenu(menuItems) {
 	var menubar = Ext.getCmp('menubar');
 	menubar.add({
 		xtype : 'tbfill'
@@ -40,7 +45,7 @@ function loadMenu() {
 	if (!Ext.isEmpty(menuItems) && menuItems.length > 0) {
 		var length = menuItems.length;
 		for ( var i = 0; i < length; i++) {
-			var menuItem = menuItems[i];
+			var menuItem = menuItems[i].data;
 			if (!Ext.isEmpty(menuItem.menu) && menuItem.menu.length > 0) {
 				var subLen = menuItem.menu.length;
 				var subMenu = new Ext.menu.Menu();
@@ -61,7 +66,7 @@ function loadMenu() {
 								icon : Ext.BLANK_IMAGE_URL,
 								iconCls : thirdMenuItem.iconCls,
 								url : thirdMenuItem.url,
-								handler : this.onItemClick
+								handler : onItemClick
 							}));
 						}
 						// 二级菜单
@@ -73,7 +78,7 @@ function loadMenu() {
 							iconCls : subMenuItem.iconCls,
 							url : subMenuItem.url,
 							menu : thirdMenu,
-							handler : this.onItemClick
+							handler : onItemClick
 						}));
 					} else {
 						// 二级菜单
@@ -84,7 +89,7 @@ function loadMenu() {
 							icon : Ext.BLANK_IMAGE_URL,
 							iconCls : subMenuItem.iconCls,
 							url : subMenuItem.url,
-							handler : this.onItemClick
+							handler : onItemClick
 						}));
 					}
 				}
@@ -110,7 +115,6 @@ function loadMenu() {
 }
 
 function onItemClick(item) {
-	alert(item.text + "|" + item.url);
 	var moduleLoader = Ext.get('moduleLoader').dom;
 	moduleLoader.src = item.url;
 }

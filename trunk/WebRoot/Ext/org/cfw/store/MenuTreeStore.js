@@ -1,4 +1,4 @@
-Ext.define('cfw.store.FuncTreeStore', {
+Ext.define('cfw.store.MenuTreeStore', {
     extend: 'Ext.data.TreeStore',
     model:'cfw.model.TreeNode',
 	root: {
