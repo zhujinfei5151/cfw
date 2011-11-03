@@ -1,4 +1,5 @@
 {
+    "name": "FuncTreeFrame.xds",
     "settings": {
         "urlPrefix": "http://localhost/",
         "directAPI": "",
@@ -13,7 +14,107 @@
         "appName": "MyApp"
     },
     "xdsVersion": "1.2.2",
-    "components": [],
+    "components": [
+        {
+            "id": "ExtBox1-ext-gen8658",
+            "type": "viewport",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "border",
+                "designer|userClassName": "MyViewport"
+            },
+            "cn": [
+                {
+                    "id": "ExtBox1-ext-gen8963",
+                    "type": "tabpanel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "activeTab": 0,
+                        "designer|userClassName": "MyTabPanel",
+                        "layout|region": "center"
+                    },
+                    "cn": [
+                        {
+                            "id": "ExtBox1-ext-gen8972",
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "title": "Tab 1",
+                                "designer|userClassName": "MyPanel"
+                            }
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen8981",
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "title": "Tab 2",
+                                "designer|userClassName": "MyPanel1"
+                            }
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen8990",
+                            "type": "panel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "title": "Tab 3",
+                                "designer|userClassName": "MyPanel2"
+                            }
+                        }
+                    ]
+                },
+                {
+                    "id": "ExtBox1-ext-gen11012",
+                    "type": "treepanel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "width": 150,
+                        "title": "功能菜单",
+                        "designer|userClassName": "MyTreePanel",
+                        "layout|region": "west"
+                    },
+                    "cn": [
+                        {
+                            "id": "ExtBox1-ext-gen11028",
+                            "type": "treeview",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyTreeView"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
     "stores": [],
     "framework": "ext40"
 }
