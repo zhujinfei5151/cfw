@@ -111,6 +111,6 @@ function loadMenu() {
 
 function onItemClick(item) {
 	alert(item.text + "|" + item.url);
-	var homemodule = Ext.get('moduleLoader').dom;
-	homemodule.src = item.url;
+	var moduleLoader = Ext.get('moduleLoader').dom;
+	moduleLoader.src = item.url;
 }
