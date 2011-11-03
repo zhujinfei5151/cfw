@@ -12,9 +12,9 @@ Ext.onReady(function() {
 });
 
 function init() {
-	var funcTree = Ext.getCmp("funcTree");
+	var menuTree = Ext.getCmp("menuTree");
 	
-	funcTree.on('itemclick', onItemClick);
+	menuTree.on('itemclick', onItemClick);
 	
 	//自动加载欢迎页面
 	var tabpanel = Ext.getCmp('tabpanel');

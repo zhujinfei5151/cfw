@@ -19,7 +19,7 @@ Ext.define('cfw.view.ui.MenuTreeNav', {
 				html : html
 			}, {
 				xtype : 'treepanel',
-				id : 'funcTree',
+				id : 'menuTree',
 				width : 150,
 				title : '功能菜单',
 				region : 'west',
@@ -31,7 +31,7 @@ Ext.define('cfw.view.ui.MenuTreeNav', {
 				viewConfig : {
 
 				},
-				store : new cfw.store.FuncTreeStore()
+				store : new cfw.store.MenuTreeStore()
 			} ]
 		});
 
