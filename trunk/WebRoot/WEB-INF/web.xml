@@ -8,7 +8,10 @@
 	<context-param>
 		<param-name>contextConfigLocation</param-name>
 		<param-value>
-			WEB-INF/conf/spring/applicationContext.xml		
+			WEB-INF/conf/spring/applicationContext.xml,
+			WEB-INF/conf/spring/spring-index-web.xml,
+			WEB-INF/conf/spring/spring-index-service.xml,
+			WEB-INF/conf/spring/sys/spring-sys-dao.xml
 		</param-value>
 	</context-param>
 
