@@ -46,19 +46,19 @@ function onLoadMenu(menuItems) {
 		var length = menuItems.length;
 		for ( var i = 0; i < length; i++) {
 			var menuItem = menuItems[i].data;
-			if (!Ext.isEmpty(menuItem.menu) && menuItem.menu.length > 0) {
-				var subLen = menuItem.menu.length;
+			if (!Ext.isEmpty(menuItem.menus) && menuItem.menus.length > 0) {
+				var subLen = menuItem.menus.length;
 				var subMenu = new Ext.menu.Menu();
 				// 二级菜单
 				for ( var j = 0; j < subLen; j++) {
-					var subMenuItem = menuItem.menu[j];
+					var subMenuItem = menuItem.menus[j];
 					// 三级菜单
-					if (!Ext.isEmpty(subMenuItem.menu)
-							&& subMenuItem.menu.length > 0) {
-						var thirdLen = subMenuItem.menu.length;
+					if (!Ext.isEmpty(subMenuItem.menus)
+							&& subMenuItem.menus.length > 0) {
+						var thirdLen = subMenuItem.menus.length;
 						var thirdMenu = new Ext.menu.Menu();
 						for ( var k = 0; k < thirdLen; k++) {
-							var thirdMenuItem = subMenuItem.menu[k];
+							var thirdMenuItem = subMenuItem.menus[k];
 							thirdMenu.add(new Ext.menu.Item({
 								id : thirdMenuItem.menuID,
 								text : thirdMenuItem.text,

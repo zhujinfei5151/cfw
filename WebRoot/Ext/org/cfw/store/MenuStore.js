@@ -3,7 +3,7 @@ Ext.define('cfw.store.MenuStore', {
     model:'cfw.model.Menu',
     proxy: {
         type: 'ajax',
-        url : 'data/Menus.json',
+        url : 'menu.action',
         reader: 'json'
     }
 });
