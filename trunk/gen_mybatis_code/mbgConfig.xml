@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration
+  PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+  "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+
+<generatorConfiguration>
+  <!-- 
+  <classPathEntry location="lib/ojdbc5.jar" />
+   -->
+  <classPathEntry location="I:/SuccessRoad/cfw/gen_mybatis_code/lib/ojdbc5.jar" />
+
+  <context id="ORALCE2Tables" targetRuntime="MyBatis3">
+	<commentGenerator>
+		<property name="suppressAllComments" value="true"/>
+	</commentGenerator>
+	<!-- oracle -->
+    <jdbcConnection driverClass="oracle.jdbc.driver.OracleDriver"
+        connectionURL="jdbc:oracle:thin:@//60.191.107.134:1520/hleemasdb"
+        userId="cfw"
+        password="cfw">
+    </jdbcConnection>
+    <javaTypeResolver >
+      <property name="forceBigDecimals" value="false" />
+    </javaTypeResolver>
+
+    <javaModelGenerator targetPackage="org.cfw.biz.sys.model" targetProject="I:\SuccessRoad\cfw\java-src">
+      <property name="enableSubPackages" value="true" />
+      <property name="trimStrings" value="true" />
+    </javaModelGenerator>
+
+    <sqlMapGenerator targetPackage="org.cfw.biz.sys.xml"  targetProject="I:\SuccessRoad\cfw\java-src">
+      <property name="enableSubPackages" value="true" />
+    </sqlMapGenerator>
+
+    <javaClientGenerator type="XMLMAPPER" targetPackage="org.cfw.biz.sys.dao"  targetProject="I:\SuccessRoad\cfw\java-src">
+      <property name="enableSubPackages" value="true" />
+    </javaClientGenerator>
+    
+    
+    <table catalog="" schema="cfw" tableName="SYS_MODULEDEF" domainObjectName="SysModuledef" >
+      <property name="useActualColumnNames" value="false" />
+    </table>
+	<table catalog="" schema="cfw" tableName="SYS_Account" domainObjectName="SysAccount" >
+      <property name="useActualColumnNames" value="false" />
+    </table>
+    <table catalog="" schema="cfw" tableName="SYS_ROLE" domainObjectName="SysRole" >
+      <property name="useActualColumnNames" value="false" />
+    </table>
+    <table catalog="" schema="cfw" tableName="SYS_ROLEMODULE" domainObjectName="SysRoleModule" >
+      <property name="useActualColumnNames" value="false" />
+    </table>
+  </context>
+</generatorConfiguration>
