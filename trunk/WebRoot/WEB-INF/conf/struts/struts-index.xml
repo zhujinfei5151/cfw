@@ -4,8 +4,12 @@
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
 	<package name="index" namespace="/" extends="struts-base">
-        <action name="login" class="loginAction" method="login">
-            <result>/Ext/index.jsp</result>
+        <action name="init" class="loginAction" method="init">
+            <result name="ext.index">/Ext/index.jsp</result>
+            <result name="ext.login">/Ext/login.jsp</result>
+        </action>
+        <action name="tab" class="homeAction" method="tab">
+            <result name="success">/Ext/TabNav.jsp</result>
         </action>
 	</package>
 	
@@ -13,6 +17,11 @@
         <action name="menu" class="loginAction" method="menu">
             <result type="json" >
             	<param name="root">menuList</param>
+            </result>
+        </action>
+        <action name="tabstore" class="homeAction" method="tabstore">
+            <result type="json" >
+            	<param name="root">tabList</param>
             </result>
         </action>
 	</package>
