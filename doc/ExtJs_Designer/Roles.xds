@@ -1,0 +1,246 @@
+{
+    "settings": {
+        "urlPrefix": "http://localhost/",
+        "directAPI": "",
+        "spacesToIndent": 4,
+        "codeGenFormat": "Class",
+        "exportPath": ".",
+        "extPath": "http://extjs.cachefly.net/ext-4.0.2a/",
+        "lineEnding": "CRLF",
+        "instantiateStore": true,
+        "exportXDSFiles": true,
+        "genTimestamps": true,
+        "appName": "MyApp"
+    },
+    "xdsVersion": "1.2.2",
+    "components": [
+        {
+            "id": "ExtBox1-ext-gen1765",
+            "type": "viewport",
+            "reference": {
+                "name": "items",
+                "type": "array"
+            },
+            "codeClass": null,
+            "userConfig": {
+                "layout": "border",
+                "designer|userClassName": "MyViewport"
+            },
+            "cn": [
+                {
+                    "id": "ExtBox1-ext-gen4640",
+                    "type": "panel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "layout": "border",
+                        "title": null,
+                        "designer|userClassName": "MyPanel",
+                        "layout|region": "center"
+                    },
+                    "cn": [
+                        {
+                            "id": "ExtBox1-ext-gen7512",
+                            "type": "gridpanel",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "title": "功能权限分配",
+                                "designer|userClassName": "MyGridPanel",
+                                "layout|region": "center"
+                            },
+                            "cn": [
+                                {
+                                    "id": "ExtBox1-ext-gen7521",
+                                    "type": "gridcolumn",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 132,
+                                        "dataIndex": "string",
+                                        "text": "String",
+                                        "designer|userClassName": "MyColumn"
+                                    }
+                                },
+                                {
+                                    "id": "ExtBox1-ext-gen7542",
+                                    "type": "booleancolumn",
+                                    "reference": {
+                                        "name": "columns",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "dataIndex": "bool",
+                                        "text": "Boolean",
+                                        "designer|userClassName": "MyBooleanColumn"
+                                    }
+                                }
+                            ]
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen8354",
+                            "type": "form",
+                            "reference": {
+                                "name": "items",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "height": 77,
+                                "layout": "auto",
+                                "bodyPadding": 10,
+                                "title": "",
+                                "designer|userClassName": "MyForm",
+                                "layout|region": "north"
+                            },
+                            "cn": [
+                                {
+                                    "id": "ExtBox1-ext-gen10071",
+                                    "type": "textfield",
+                                    "reference": {
+                                        "name": "items",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "width": 200,
+                                        "fieldLabel": "名称",
+                                        "labelAlign": "right",
+                                        "labelWidth": 60,
+                                        "designer|userClassName": "MyTextField",
+                                        "layout|anchor": "100%"
+                                    }
+                                },
+                                {
+                                    "id": "ExtBox1-ext-gen10373",
+                                    "type": "toolbar",
+                                    "reference": {
+                                        "name": "dockedItems",
+                                        "type": "array"
+                                    },
+                                    "codeClass": null,
+                                    "userConfig": {
+                                        "designer|userClassName": "MyToolbar",
+                                        "dock": "top"
+                                    },
+                                    "cn": [
+                                        {
+                                            "id": "ExtBox1-ext-gen11337",
+                                            "type": "button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "增 加",
+                                                "designer|userClassName": "MyButton",
+                                                "layout|flex": null
+                                            }
+                                        },
+                                        {
+                                            "id": "ExtBox1-ext-gen11497",
+                                            "type": "button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "修 改",
+                                                "designer|userClassName": "MyButton1",
+                                                "layout|flex": null
+                                            }
+                                        },
+                                        {
+                                            "id": "ExtBox1-ext-gen11658",
+                                            "type": "button",
+                                            "reference": {
+                                                "name": "items",
+                                                "type": "array"
+                                            },
+                                            "codeClass": null,
+                                            "userConfig": {
+                                                "text": "删 除",
+                                                "designer|userClassName": "MyButton2",
+                                                "layout|flex": null
+                                            }
+                                        }
+                                    ]
+                                }
+                            ]
+                        }
+                    ]
+                },
+                {
+                    "id": "ExtBox1-ext-gen12612",
+                    "type": "gridpanel",
+                    "reference": {
+                        "name": "items",
+                        "type": "array"
+                    },
+                    "codeClass": null,
+                    "userConfig": {
+                        "width": 200,
+                        "title": null,
+                        "designer|userClassName": "MyGridPanel1",
+                        "layout|region": "west"
+                    },
+                    "cn": [
+                        {
+                            "id": "ExtBox1-ext-gen12625",
+                            "type": "gridcolumn",
+                            "reference": {
+                                "name": "columns",
+                                "type": "array"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "width": 160,
+                                "dataIndex": "string",
+                                "text": "名称",
+                                "designer|userClassName": "MyColumn1"
+                            }
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen12653",
+                            "type": "gridview",
+                            "reference": {
+                                "name": "viewConfig",
+                                "type": "object"
+                            },
+                            "codeClass": null,
+                            "userConfig": {
+                                "designer|userClassName": "MyGridView1"
+                            }
+                        },
+                        {
+                            "id": "ExtBox1-ext-gen14164",
+                            "type": "checkboxselectionmodel",
+                            "reference": {
+                                "name": "selModel",
+                                "type": "object"
+                            },
+                            "codeClass": "Ext.selection.CheckboxModel",
+                            "userConfig": {
+                                "designer|userClassName": "MyCheckboxSelectionModel"
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "stores": [],
+    "framework": "ext40"
+}
