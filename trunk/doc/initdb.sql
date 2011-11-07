@@ -125,7 +125,6 @@ create table SYS_ROLE
 (
   ROLEID        NUMBER(4) not null,
   NAME          VARCHAR2(20) not null,
-  PARENTROLEID  NUMBER(4) not null,
   CREATETIME    DATE not null,
   CREATEACCOUNT VARCHAR2(20) not null
 );
@@ -137,8 +136,6 @@ comment on column SYS_ROLE.ROLEID
   is '角色编码';
 comment on column SYS_ROLE.NAME
   is '角色名称';
-comment on column SYS_ROLE.PARENTROLEID
-  is '所属角色编码';
 comment on column SYS_ROLE.CREATETIME
   is '创建时间';
 comment on column SYS_ROLE.CREATEACCOUNT
@@ -146,6 +143,7 @@ comment on column SYS_ROLE.CREATEACCOUNT
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table SYS_ROLE
   add constraint PK_SYS_ROLE primary key (ROLEID);
+
   
 -- Create table
 create table SYS_ROLEMODULE
