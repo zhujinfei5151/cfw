@@ -52,7 +52,9 @@ create table SYS_ACCOUNT
   CREATETIME    DATE not null,
   CREATEACCOUNT VARCHAR2(20) not null,
   HOMEPAGE      VARCHAR2(100),
-  EMAIL         VARCHAR2(50)
+  EMAIL         VARCHAR2(50),
+  OWNERID       NUMBER(4) not null,
+  OWNERTYPE     NUMBER(2) not null
 );
 -- Add comments to the table 
 comment on table SYS_ACCOUNT
@@ -80,9 +82,43 @@ comment on column SYS_ACCOUNT.HOMEPAGE
   is '登录信息';
 comment on column SYS_ACCOUNT.EMAIL
   is '电子邮件';
+comment on column SYS_ACCOUNT.OWNERID
+  is '所属对象编码';
+comment on column SYS_ACCOUNT.OWNERTYPE
+  is '所属对象类型';
 -- Create/Recreate primary, unique and foreign key constraints 
 alter table SYS_ACCOUNT
   add constraint PK_SYS_ACCOUNT primary key (ACCOUNT);
+  
+-- Create table
+create table SYS_DEPARTMENT
+(
+  DEPARTMENTID  NUMBER(4) not null,
+  DISC          VARCHAR2(20) not null,
+  OWNERTYPE     NUMBER(4) not null,
+  OWNERID       NUMBER(4) not null,
+  CREATETIME    DATE not null,
+  CREATEACCOUNT VARCHAR2(20) not null
+);
+-- Add comments to the table 
+comment on table SYS_DEPARTMENT
+  is '部门定义表';
+-- Add comments to the columns 
+comment on column SYS_DEPARTMENT.DEPARTMENTID
+  is '部门编码';
+comment on column SYS_DEPARTMENT.DISC
+  is '部门名称';
+comment on column SYS_DEPARTMENT.OWNERTYPE
+  is '上级部门类别';
+comment on column SYS_DEPARTMENT.OWNERID
+  is '上级部门编码';
+comment on column SYS_DEPARTMENT.CREATETIME
+  is '创建时间';
+comment on column SYS_DEPARTMENT.CREATEACCOUNT
+  is '创建者';
+-- Create/Recreate primary, unique and foreign key constraints 
+alter table SYS_DEPARTMENT
+  add constraint SYS_SYS_DEPARTMENT primary key (DEPARTMENTID);
   
 -- Create table
 create table SYS_ROLE
