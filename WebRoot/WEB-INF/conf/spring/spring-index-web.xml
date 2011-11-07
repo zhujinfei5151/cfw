@@ -15,4 +15,5 @@
 	default-autowire="byName">
 	
 	<bean id="loginAction" class="org.cfw.web.index.LoginAction"/>
+	<bean id="homeAction" class="org.cfw.web.index.HomeAction"/>
 </beans>

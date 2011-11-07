@@ -11,7 +11,9 @@
 			WEB-INF/conf/spring/applicationContext.xml,
 			WEB-INF/conf/spring/spring-index-web.xml,
 			WEB-INF/conf/spring/spring-index-service.xml,
-			WEB-INF/conf/spring/sys/spring-sys-dao.xml
+			WEB-INF/conf/spring/sys/spring-sys-dao.xml,
+			WEB-INF/conf/spring/sys/spring-sys-service.xml,
+			WEB-INF/conf/spring/sys/spring-sys-web.xml
 		</param-value>
 	</context-param>
 
