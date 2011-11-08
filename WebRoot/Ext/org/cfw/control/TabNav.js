@@ -12,14 +12,24 @@ Ext.onReady(function() {
 
 function init() {
 	// 自动加载菜单
+	var tabstore = new cfw.store.TabStore();
+	tabstore.load({
+		params: {
+			moduleid : '01010000'
+		},
+		callback: loadtab
+	});
+}
+
+function loadtab(tabs) {
 	var tabpanel = Ext.getCmp('tabpanel');
 	if (!Ext.isEmpty(tabs) && tabs.length > 0) {
 		var length = tabs.length;
 		for ( var i = 0; i < length; i++) {
-			var tab = tabs[i];
+			var tab = tabs[i].data;
 			// 模块菜单
 			var curTab = tabpanel.add({
-				id : tab.menuID,
+				id : tab.moduleid,
 				title : tab.text,
 				autoScroll : true,
 				url : tab.url,

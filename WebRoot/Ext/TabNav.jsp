@@ -5,6 +5,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="head.jsp" />
+<script type="text/javascript" src="Ext/org/cfw/model/Menu.js"></script>
+<script type="text/javascript" src="Ext/org/cfw/store/TabStore.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/view/TabNav.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/control/TabNav.js"></script>
 <title>通用信息系统框架</title>
