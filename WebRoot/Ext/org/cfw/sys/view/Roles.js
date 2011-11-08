@@ -17,18 +17,16 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 				region : 'center',
 				items : [ {
 					xtype : 'gridpanel',
+					id : 'modulegrid',
 					title : '功能权限分配',
 					region : 'center',
+					store : new cfw.sys.store.MenuStore(),
 					columns : [ {
 						xtype : 'gridcolumn',
-						width : 132,
-						dataIndex : 'string',
-						text : 'String'
-					}, {
-						xtype : 'booleancolumn',
-						dataIndex : 'bool',
-						text : 'Boolean'
-					} ]
+						width : 200,
+						dataIndex : 'text',
+						text : '功能名称'
+					}]
 				}, {
 					xtype : 'form',
 					height : 77,
@@ -63,19 +61,21 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 				} ]
 			}, {
 				xtype : 'gridpanel',
+				id : 'rolegrid',
 				width : 200,
 				region : 'west',
+				store : new cfw.sys.store.RoleStore(),
 				columns : [ {
 					xtype : 'gridcolumn',
 					width : 160,
-					dataIndex : 'string',
+					dataIndex : 'name',
 					text : '名称'
 				} ],
 				viewConfig : {
 
 				},
 				selModel : Ext.create('Ext.selection.CheckboxModel', {
-
+					
 				})
 			} ]
 		});
