@@ -8,4 +8,17 @@
 			<result name="success">/Ext/org/cfw/sys/Roles.jsp</result>
         </action>
 	</package>
+	
+	<package name="jsonSys" namespace="/sys" extends="json-base">
+        <action name="role_query" class="rolesAction" method="query">
+            <result type="json" >
+            	<param name="root">roleList</param>
+            </result>
+        </action>
+        <action name="role_menu" class="rolesAction" method="menu">
+            <result type="json" >
+            	<param name="root">menuList</param>
+            </result>
+        </action>
+	</package>
 </struts>
