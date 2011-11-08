@@ -4,7 +4,6 @@
   <resultMap id="BaseResultMap" type="org.cfw.biz.sys.model.SysRole" >
     <id column="ROLEID" property="roleid" jdbcType="DECIMAL" />
     <result column="NAME" property="name" jdbcType="VARCHAR" />
-    <result column="PARENTROLEID" property="parentroleid" jdbcType="DECIMAL" />
     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
     <result column="CREATEACCOUNT" property="createaccount" jdbcType="VARCHAR" />
   </resultMap>
@@ -67,7 +66,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ROLEID, NAME, PARENTROLEID, CREATETIME, CREATEACCOUNT
+    ROLEID, NAME, CREATETIME, CREATEACCOUNT
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cfw.biz.sys.model.SysRoleExample" >
     select
@@ -100,9 +99,9 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.cfw.biz.sys.model.SysRole" >
-    insert into CFW.SYS_ROLE (ROLEID, NAME, PARENTROLEID, 
+    insert into CFW.SYS_ROLE (ROLEID, NAME, 
       CREATETIME, CREATEACCOUNT)
-    values (#{roleid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR}, #{parentroleid,jdbcType=DECIMAL}, 
+    values (#{roleid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},  
       #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.cfw.biz.sys.model.SysRole" >
@@ -130,9 +129,6 @@
       </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
-      </if>
-      <if test="parentroleid != null" >
-        #{parentroleid,jdbcType=DECIMAL},
       </if>
       <if test="createtime != null" >
         #{createtime,jdbcType=TIMESTAMP},
@@ -188,9 +184,6 @@
       <if test="name != null" >
         NAME = #{name,jdbcType=VARCHAR},
       </if>
-      <if test="parentroleid != null" >
-        PARENTROLEID = #{parentroleid,jdbcType=DECIMAL},
-      </if>
       <if test="createtime != null" >
         CREATETIME = #{createtime,jdbcType=TIMESTAMP},
       </if>
@@ -203,7 +196,6 @@
   <update id="updateByPrimaryKey" parameterType="org.cfw.biz.sys.model.SysRole" >
     update CFW.SYS_ROLE
     set NAME = #{name,jdbcType=VARCHAR},
-      PARENTROLEID = #{parentroleid,jdbcType=DECIMAL},
       CREATETIME = #{createtime,jdbcType=TIMESTAMP},
       CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR}
     where ROLEID = #{roleid,jdbcType=DECIMAL}
