@@ -10,4 +10,11 @@ Ext.onReady(function() {
 });
 
 function init() {
+	var rolegrid = Ext.getCmp('rolegrid');
+	var rolestore = rolegrid.getStore();
+	rolestore.load();
+	
+	var modulegrid = Ext.getCmp('modulegrid');
+	var menustore = modulegrid.getStore();
+	menustore.load();
 }
