@@ -14,4 +14,5 @@
       http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
 	default-autowire="byName">
 	
+	<bean id="roleService" class="org.cfw.biz.sys.service.impl.RoleServiceImpl"></bean>
 </beans>
