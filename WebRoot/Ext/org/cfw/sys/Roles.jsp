@@ -6,7 +6,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <jsp:include page="/Ext/head.jsp" />
 <script type="text/javascript" src="Ext/org/cfw/model/Menu.js"></script>
+<script type="text/javascript" src="Ext/org/cfw/common/model/DisplayValuePair.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/sys/model/Role.js"></script>
+<script type="text/javascript" src="Ext/org/cfw/sys/store/MaskStore.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/sys/store/RoleStore.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/sys/store/MenuStore.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/sys/view/Roles.js"></script>
