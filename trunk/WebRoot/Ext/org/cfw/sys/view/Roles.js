@@ -7,7 +7,10 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 
 	initComponent : function() {
 		var me = this;
-
+		var cellEditing = Ext.create('Ext.grid.plugin.CellEditing', {
+			clicksToEdit : 1
+		});
+		var maskstore = new cfw.sys.store.MaskStore();
 		Ext.applyIf(me, {
 			items : [ {
 				xtype : 'panel',
@@ -26,7 +29,20 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 						width : 200,
 						dataIndex : 'text',
 						text : '功能名称'
-					}]
+					}, {
+						header : '操作',
+						width : 80,
+						dataIndex : 'mask',
+						field : {
+							xtype : 'combobox',
+							triggerAction : 'all',
+							displayField : 'display',
+							valueField : 'value',
+							store : maskstore
+						},
+						renderer : renderMask
+					} ],
+			        plugins: [cellEditing]
 				}, {
 					xtype : 'form',
 					height : 77,
@@ -71,11 +87,8 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 					dataIndex : 'name',
 					text : '名称'
 				} ],
-				viewConfig : {
-
-				},
 				selModel : Ext.create('Ext.selection.CheckboxModel', {
-					
+
 				})
 			} ]
 		});
@@ -83,3 +96,8 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 		me.callParent(arguments);
 	}
 });
+
+function renderMask(value) {
+	var maskstore = new cfw.sys.store.MaskStore();
+	return renderByValue(maskstore,value);
+}
