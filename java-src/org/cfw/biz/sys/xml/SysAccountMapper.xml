@@ -1,0 +1,306 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="org.cfw.biz.sys.dao.SysAccountMapper" >
+  <resultMap id="BaseResultMap" type="org.cfw.biz.sys.model.SysAccount" >
+    <id column="ACCOUNT" property="account" jdbcType="VARCHAR" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="PASSWORD" property="password" jdbcType="DECIMAL" />
+    <result column="ROLEID" property="roleid" jdbcType="DECIMAL" />
+    <result column="SEX" property="sex" jdbcType="DECIMAL" />
+    <result column="TELEPHONE" property="telephone" jdbcType="VARCHAR" />
+    <result column="POSITION" property="position" jdbcType="VARCHAR" />
+    <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="CREATEACCOUNT" property="createaccount" jdbcType="VARCHAR" />
+    <result column="HOMEPAGE" property="homepage" jdbcType="VARCHAR" />
+    <result column="EMAIL" property="email" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    ACCOUNT, NAME, PASSWORD, ROLEID, SEX, TELEPHONE, POSITION, CREATETIME, CREATEACCOUNT, 
+    HOMEPAGE, EMAIL
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cfw.biz.sys.model.SysAccountExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from CFW.SYS_ACCOUNT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from CFW.SYS_ACCOUNT
+    where ACCOUNT = #{account,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from CFW.SYS_ACCOUNT
+    where ACCOUNT = #{account,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="org.cfw.biz.sys.model.SysAccountExample" >
+    delete from CFW.SYS_ACCOUNT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="org.cfw.biz.sys.model.SysAccount" >
+    insert into CFW.SYS_ACCOUNT (ACCOUNT, NAME, PASSWORD, 
+      ROLEID, SEX, TELEPHONE, 
+      POSITION, CREATETIME, CREATEACCOUNT, 
+      HOMEPAGE, EMAIL)
+    values (#{account,jdbcType=VARCHAR}, #{name,jdbcType=VARCHAR}, #{password,jdbcType=DECIMAL}, 
+      #{roleid,jdbcType=DECIMAL}, #{sex,jdbcType=DECIMAL}, #{telephone,jdbcType=VARCHAR}, 
+      #{position,jdbcType=VARCHAR}, #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR}, 
+      #{homepage,jdbcType=VARCHAR}, #{email,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="org.cfw.biz.sys.model.SysAccount" >
+    insert into CFW.SYS_ACCOUNT
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        ACCOUNT,
+      </if>
+      <if test="name != null" >
+        NAME,
+      </if>
+      <if test="password != null" >
+        PASSWORD,
+      </if>
+      <if test="roleid != null" >
+        ROLEID,
+      </if>
+      <if test="sex != null" >
+        SEX,
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE,
+      </if>
+      <if test="position != null" >
+        POSITION,
+      </if>
+      <if test="createtime != null" >
+        CREATETIME,
+      </if>
+      <if test="createaccount != null" >
+        CREATEACCOUNT,
+      </if>
+      <if test="homepage != null" >
+        HOMEPAGE,
+      </if>
+      <if test="email != null" >
+        EMAIL,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="account != null" >
+        #{account,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=DECIMAL},
+      </if>
+      <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="telephone != null" >
+        #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createaccount != null" >
+        #{createaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="homepage != null" >
+        #{homepage,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        #{email,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="org.cfw.biz.sys.model.SysAccountExample" resultType="java.lang.Integer" >
+    select count(*) from CFW.SYS_ACCOUNT
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update CFW.SYS_ACCOUNT
+    <set >
+      <if test="record.account != null" >
+        ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        NAME = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        PASSWORD = #{record.password,jdbcType=DECIMAL},
+      </if>
+      <if test="record.roleid != null" >
+        ROLEID = #{record.roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="record.sex != null" >
+        SEX = #{record.sex,jdbcType=DECIMAL},
+      </if>
+      <if test="record.telephone != null" >
+        TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        POSITION = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createtime != null" >
+        CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.createaccount != null" >
+        CREATEACCOUNT = #{record.createaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.homepage != null" >
+        HOMEPAGE = #{record.homepage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.email != null" >
+        EMAIL = #{record.email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update CFW.SYS_ACCOUNT
+    set ACCOUNT = #{record.account,jdbcType=VARCHAR},
+      NAME = #{record.name,jdbcType=VARCHAR},
+      PASSWORD = #{record.password,jdbcType=DECIMAL},
+      ROLEID = #{record.roleid,jdbcType=DECIMAL},
+      SEX = #{record.sex,jdbcType=DECIMAL},
+      TELEPHONE = #{record.telephone,jdbcType=VARCHAR},
+      POSITION = #{record.position,jdbcType=VARCHAR},
+      CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
+      CREATEACCOUNT = #{record.createaccount,jdbcType=VARCHAR},
+      HOMEPAGE = #{record.homepage,jdbcType=VARCHAR},
+      EMAIL = #{record.email,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="org.cfw.biz.sys.model.SysAccount" >
+    update CFW.SYS_ACCOUNT
+    <set >
+      <if test="name != null" >
+        NAME = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        PASSWORD = #{password,jdbcType=DECIMAL},
+      </if>
+      <if test="roleid != null" >
+        ROLEID = #{roleid,jdbcType=DECIMAL},
+      </if>
+      <if test="sex != null" >
+        SEX = #{sex,jdbcType=DECIMAL},
+      </if>
+      <if test="telephone != null" >
+        TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        POSITION = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="createtime != null" >
+        CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="createaccount != null" >
+        CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="homepage != null" >
+        HOMEPAGE = #{homepage,jdbcType=VARCHAR},
+      </if>
+      <if test="email != null" >
+        EMAIL = #{email,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where ACCOUNT = #{account,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="org.cfw.biz.sys.model.SysAccount" >
+    update CFW.SYS_ACCOUNT
+    set NAME = #{name,jdbcType=VARCHAR},
+      PASSWORD = #{password,jdbcType=DECIMAL},
+      ROLEID = #{roleid,jdbcType=DECIMAL},
+      SEX = #{sex,jdbcType=DECIMAL},
+      TELEPHONE = #{telephone,jdbcType=VARCHAR},
+      POSITION = #{position,jdbcType=VARCHAR},
+      CREATETIME = #{createtime,jdbcType=TIMESTAMP},
+      CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR},
+      HOMEPAGE = #{homepage,jdbcType=VARCHAR},
+      EMAIL = #{email,jdbcType=VARCHAR}
+    where ACCOUNT = #{account,jdbcType=VARCHAR}
+  </update>
+</mapper>
