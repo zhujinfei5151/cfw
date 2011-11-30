@@ -1,4 +1,2 @@
-<%
-String redirectPath = request.getContextPath()+"/init.action";
-response.sendRedirect(redirectPath);
-%>
+<%String redirectPath = request.getContextPath() + "/init.action";
+            response.sendRedirect(redirectPath);%>
