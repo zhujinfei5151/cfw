@@ -24,5 +24,15 @@
             	<param name="root">tabList</param>
             </result>
         </action>
+        <!-- 验证码图片 -->
+		<action name="checkcode_init" class="imageCodeAction">
+			<result name="success" type="stream">
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+        <action name="login" class="accountLoginAction" method="login">
+        	<result name="success" type="json"></result>
+        </action>
 	</package>
 </struts>

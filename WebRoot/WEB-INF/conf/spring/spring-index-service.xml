@@ -14,7 +14,9 @@
       http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
 	default-autowire="byName">
 	
-	<bean id="loginService" class="org.cfw.biz.service.impl.LoginServiceImpl"></bean>
+	<bean id="loginService" class="org.cfw.biz.service.impl.LoginServiceImpl">
+		<property name="sysAccountMapper" ref="sysAccountMapper"></property>
+	</bean>
 	<bean id="homeService" class="org.cfw.biz.service.impl.HomeServiceImpl"></bean>
 	<bean id="cachedVOUtil" class="org.cfw.common.CachedVOUtil" >
 		<property name="sysModuledefMapper" ref="sysModuledefMapper"/>
