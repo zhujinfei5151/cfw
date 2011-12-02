@@ -31,8 +31,8 @@
 				<param name="bufferSize">2048</param>
 			</result>
 		</action>
-        <action name="login" class="accountLoginAction" method="login">
-        	<result name="success" type="json"></result>
+        <action name="login" class="loginAction" method="login">
+        	<result type="json"></result>
         </action>
 	</package>
 </struts>
