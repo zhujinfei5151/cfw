@@ -12,10 +12,12 @@
 .CheckCode {
 	float: left;
 }
+
 .redfont {
 	color: #ff0000;
 	padding-left: 10px;
 }
+
 .x-form-code {
 	width: 73px;
 	height: 23px;
