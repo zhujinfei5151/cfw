@@ -17,5 +17,4 @@
 	<bean id="loginAction" class="org.cfw.web.index.LoginAction"/>
 	<bean id="homeAction" class="org.cfw.web.index.HomeAction"/>
 	<bean id="imageCodeAction" class="org.cfw.web.index.ImageAction"/>
-	<bean id="accountLoginAction" class="org.cfw.web.index.AccountLoginAction"/> 
 </beans>
