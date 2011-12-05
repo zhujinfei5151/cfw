@@ -47,11 +47,9 @@ Ext.define('cfw.login.view.Login', {
 			}, checkcode ],
 			buttons : [ {
 				text : '登录',
-				action : 'login',
 				id : "loginButton"
 			}, {
 				text : '重置',
-				action : 'reset',
 				id : 'resetButton'
 			} ]
 		});
