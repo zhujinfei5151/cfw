@@ -6,7 +6,7 @@
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
     <result column="CREATEACCOUNT" property="createaccount" jdbcType="VARCHAR" />
-    <result column="ROLECOMMENT" property="comment" jdbcType="VARCHAR" />
+    <result column="ROLECOMMENT" property="rolecomment" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -102,13 +102,15 @@
   <insert id="insert" parameterType="org.cfw.biz.sys.model.SysRole" >
     insert into CFW.SYS_ROLE (ROLEID, NAME,ROLECOMMENT 
       CREATETIME, CREATEACCOUNT)
-    values (seq_sys_role.nextval, #{name,jdbcType=VARCHAR},  
-      #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR},#{comment,jdbcType=VARCHAR})
+    values (#{roleid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},  
+      #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR},#{rolecomment,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.cfw.biz.sys.model.SysRole" >
     insert into CFW.SYS_ROLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
+       <if test="roleid != null" >
         ROLEID,
+      </if>
       <if test="name != null" >
         NAME,
       </if>
@@ -118,12 +120,14 @@
       <if test="createaccount != null" >
         CREATEACCOUNT,
       </if>
-      <if test="comment != null">
+      <if test="rolecomment != null">
         ROLECOMMENT
       </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-     seq_sys_role.nextval,
+     <if test="roleid != null" >
+        #{roleid,jdbcType=DECIMAL},
+      </if>
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -133,8 +137,8 @@
       <if test="createaccount != null" >
         #{createaccount,jdbcType=VARCHAR},
       </if>
-      <if test="comment != null">
-        #{comment,jdbcType=VARCHAR}
+      <if test="rolecomment != null">
+        #{rolecomment,jdbcType=VARCHAR}
       </if> 
     </trim>
   </insert>
@@ -201,7 +205,10 @@
     set NAME = #{name,jdbcType=VARCHAR},
       CREATETIME = #{createtime,jdbcType=TIMESTAMP},
       CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR},
-      ROLECOMMENT = #{comment,jdbcType=VARCHAR}
+      ROLECOMMENT = #{rolecomment,jdbcType=VARCHAR}
     where ROLEID = #{roleid,jdbcType=DECIMAL}
   </update>
+  <select id="selectSeqSysRoleID" resultType="java.lang.Integer">
+    select seq_sys_role.nextval from dual
+  </select>
 </mapper>

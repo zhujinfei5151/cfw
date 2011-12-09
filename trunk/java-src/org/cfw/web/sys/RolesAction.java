@@ -1,9 +1,15 @@
 package org.cfw.web.sys;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
+import net.sf.json.JSONArray;
+import net.sf.json.JSONObject;
+
 import org.cfw.biz.sys.model.SysRole;
+import org.cfw.biz.sys.model.SysRoleModule;
+import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.biz.sys.service.RoleService;
 import org.cfw.common.vo.MenuVO;
 import org.cfw.web.common.BaseAction;
@@ -14,20 +20,24 @@ public class RolesAction extends BaseAction {
     private RoleService   roleService;
     private List<SysRole> roleList;
     private List<MenuVO>  menuList;
+    private short         roleid;
 
     public String init() {
         return SUCCESS;
     }
 
     public String query() {
-        String root = getRequest().getParameter("root");
-        String nodeId = getRequest().getParameter("nodeId");
-        roleList = roleService.query();
+        // account
+        roleList = roleService.queryByCreateAccount("test1");
+        for (SysRole role : roleList) {
+            role.setRoleModuleList(roleService.selectSysRoleModuleList(role.getRoleid()));
+        }
         return SUCCESS;
     }
 
     public String menu() {
-        menuList = roleService.menu();
+        // roleid
+        menuList = roleService.menu((short) 2);
         return SUCCESS;
     }
 
@@ -40,20 +50,90 @@ public class RolesAction extends BaseAction {
     }
 
     public String addRole() {
+        String data = getRequest().getParameter("data");
         String name = getRequest().getParameter("name");
-        String comment = getRequest().getParameter("comment");
+        String comment = getRequest().getParameter("rolecomment");
+        roleid = roleService.selectSeqSysRoleID();
+
         SysRole sysrole = new SysRole();
-        sysrole.setComment(comment);
-        sysrole.setCreateaccount("admin");
+        sysrole.setRoleid(roleid);
+        sysrole.setRolecomment(comment);
+        // account
+        sysrole.setCreateaccount("test1");
         sysrole.setCreatetime(new Date());
         sysrole.setName(name);
-
         roleService.insertRole(sysrole);
+
+        List<SysRoleModule> sysRoleModuleList = new ArrayList<SysRoleModule>();
+        SysRoleModule sysRoleModule;
+        JSONObject jsonObject;
+
+        JSONArray jsonArray = JSONArray.fromObject(data);
+        int size = jsonArray.size();
+        for (int i = 0; i < size; i++) {
+            jsonObject = jsonArray.getJSONObject(i);
+            sysRoleModule = new SysRoleModule();
+            sysRoleModule.setMask(Short.parseShort(jsonObject.getString("mask")));
+            sysRoleModule.setModuleid(jsonObject.getString("moduleid"));
+            sysRoleModule.setRoleid(roleid);
+            sysRoleModuleList.add(sysRoleModule);
+        }
+        roleService.insertRoleModuleList(sysRoleModuleList);
+
+        return SUCCESS;
+    }
+
+    public String modifyRole() {
+        String data = getRequest().getParameter("data");
+        String name = getRequest().getParameter("name");
+        String comment = getRequest().getParameter("rolecomment");
+        
+        SysRole sysrole = new SysRole();
+        sysrole.setRoleid(roleid);
+        sysrole.setRolecomment(comment);
+        sysrole.setName(name);
+        roleService.updateRole(sysrole);
+
+        List<SysRoleModule> sysRoleModuleList = new ArrayList<SysRoleModule>();
+        SysRoleModule sysRoleModule;
+        JSONObject jsonObject;
+        
+        JSONArray jsonArray = JSONArray.fromObject(data);
+        int size = jsonArray.size();
+        for(int i = 0;i < size;i++){
+            jsonObject = jsonArray.getJSONObject(i);
+            sysRoleModule = new SysRoleModule();
+            sysRoleModule.setMask(Short.parseShort(jsonObject.getString("mask")));
+            sysRoleModule.setModuleid(jsonObject.getString("moduleid"));
+            sysRoleModule.setRoleid(roleid);
+            sysRoleModuleList.add(sysRoleModule);
+        }
+        roleService.updateRoleModuleList(sysRoleModuleList);
+
+        return SUCCESS;
+    }
+
+    public String removeRole(){
+        SysRoleModuleExample example = new SysRoleModuleExample();
+        SysRoleModuleExample.Criteria cr = example.createCriteria();
+        cr.andRoleidEqualTo(roleid);
+        roleService.deleteRoleModuleByExample(example);
+
+        roleService.deleteRoleByRoleID(roleid);
+        
         return SUCCESS;
     }
 
     public void setRoleService(RoleService roleService) {
         this.roleService = roleService;
+    }
+
+    public short getRoleid() {
+        return roleid;
+    }
+
+    public void setRoleid(short roleid) {
+        this.roleid = roleid;
     }
 
 }

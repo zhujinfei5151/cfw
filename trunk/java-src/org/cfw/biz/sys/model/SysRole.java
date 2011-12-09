@@ -1,6 +1,8 @@
 package org.cfw.biz.sys.model;
 
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 public class SysRole {
     private Short roleid;
@@ -13,7 +15,9 @@ public class SysRole {
 
     private String createaccount;
 
-    private String comment;
+    private String              rolecomment;
+
+    private List<SysRoleModule> roleModuleList;
 
     public Short getRoleid() {
         return roleid;
@@ -55,12 +59,21 @@ public class SysRole {
         this.createaccount = createaccount == null ? null : createaccount.trim();
     }
 
-    public String getComment() {
-        return comment;
+    public String getRolecomment() {
+        return rolecomment;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment == null ? null : comment.trim();
+    public void setRolecomment(String rolecomment) {
+        this.rolecomment = rolecomment == null ? null : rolecomment.trim();
+        ;
+    }
+
+    public List<SysRoleModule> getRoleModuleList() {
+        return roleModuleList == null ? new ArrayList<SysRoleModule>(0) : roleModuleList;
+    }
+
+    public void setRoleModuleList(List<SysRoleModule> roleModuleList) {
+        this.roleModuleList = roleModuleList;
     }
 
 }
