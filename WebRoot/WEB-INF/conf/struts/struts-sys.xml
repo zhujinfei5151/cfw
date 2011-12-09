@@ -20,5 +20,8 @@
             	<param name="root">menuList</param>
             </result>
         </action>
+        <action name="role_*" class="rolesAction" method="{1}">
+            <result type="json"></result>
+        </action>
 	</package>
 </struts>

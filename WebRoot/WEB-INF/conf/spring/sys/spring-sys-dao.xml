@@ -22,6 +22,10 @@
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="org.cfw.biz.sys.dao.SysRoleMapper" />
 	</bean>
+	<bean id="sysRoleModuleMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
+		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
+		<property name="mapperInterface" value="org.cfw.biz.sys.dao.SysRoleModuleMapper" />
+	</bean>
 	<bean id="sysAccountMapper" class="org.mybatis.spring.mapper.MapperFactoryBean">
 		<property name="sqlSessionFactory" ref="sqlSessionFactory" />
 		<property name="mapperInterface" value="org.cfw.biz.sys.dao.SysAccountMapper" />
