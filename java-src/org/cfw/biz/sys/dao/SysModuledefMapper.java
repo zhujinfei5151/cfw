@@ -18,6 +18,8 @@ public interface SysModuledefMapper {
 
     List<SysModuledef> selectByExample(SysModuledefExample example);
 
+    List<SysModuledef> selectByRoleID(int roleid);
+
     SysModuledef selectByPrimaryKey(String moduleid);
 
     int updateByExampleSelective(@Param("record") SysModuledef record, @Param("example") SysModuledefExample example);

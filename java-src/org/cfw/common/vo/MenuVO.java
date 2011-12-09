@@ -11,6 +11,7 @@ public class MenuVO {
     private String       url;
     private String       handler;
     private String       moduleid;
+    private int          mask;
     private boolean      leaf;
     private List<MenuVO> menus;
     private boolean      expanded = true;
@@ -85,6 +86,14 @@ public class MenuVO {
 
     public void setExpanded(boolean expanded) {
         this.expanded = expanded;
+    }
+
+    public int getMask() {
+        return mask;
+    }
+
+    public void setMask(int mask) {
+        this.mask = mask;
     }
 
 }
