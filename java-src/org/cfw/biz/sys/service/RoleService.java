@@ -10,4 +10,6 @@ public interface RoleService {
     List<SysRole> query();
 
     List<MenuVO> menu();
+
+    void insertRole(SysRole sysRole);
 }

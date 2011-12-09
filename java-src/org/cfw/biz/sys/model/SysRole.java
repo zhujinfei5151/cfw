@@ -13,6 +13,8 @@ public class SysRole {
 
     private String createaccount;
 
+    private String comment;
+
     public Short getRoleid() {
         return roleid;
     }
@@ -52,4 +54,13 @@ public class SysRole {
     public void setCreateaccount(String createaccount) {
         this.createaccount = createaccount == null ? null : createaccount.trim();
     }
+
+    public String getComment() {
+        return comment;
+    }
+
+    public void setComment(String comment) {
+        this.comment = comment == null ? null : comment.trim();
+    }
+
 }
