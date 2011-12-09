@@ -18,27 +18,48 @@ public class RoleServiceImpl implements RoleService {
         return sysRoleMapper.selectByExample(null);
     }
 
+    public void insertRole(SysRole sysRole) {
+        sysRoleMapper.insertSelective(sysRole);
+    }
+
     public List<MenuVO> menu() {
         List<MenuVO> menuList = new ArrayList<MenuVO>();
+        MenuVO menuVO;
         List<SysModuledef> moduledefList = CachedVOUtil.getModuledefList();
         for (SysModuledef moduledef : moduledefList) {
-            MenuVO vo = new MenuVO();
-            String moduleid = moduledef.getModuleid();
-            StringBuffer text = new StringBuffer();
-            if (moduleid.indexOf("000000") > 0) {
-                text.append("├ ");
-            } else if (moduleid.indexOf("0000") > 0) {
-                text.append("├── ");
-            } else if (moduleid.indexOf("00") > 0) {
-                text.append("├──── ");
+            if (moduledef.getModuleid().equalsIgnoreCase(moduledef.getParentmoduleid())) {
+                menuVO = new MenuVO();
+                menuVO.setText(moduledef.getName());
+                menuVO.setIconCls(moduledef.getIcon());
+                menuVO.setModuleid(moduledef.getModuleid());
+                menuVO.setUrl(moduledef.getUrl());
+                
+                menuVO.setChildren(selectChildren(menuVO, moduledefList));
+                menuList.add(menuVO);
             }
-            text.append(moduledef.getName());
-            vo.setText(text.toString());
-            vo.setIconCls(moduledef.getIcon());
-            vo.setModuleid(moduleid);
-            vo.setUrl(moduledef.getUrl());
-            menuList.add(vo);
         }
+        return menuList;
+    }
+
+    public List<MenuVO> selectChildren(MenuVO menu, List<SysModuledef> moduleDefList) {
+        MenuVO menuVO;
+        boolean leaf = true;
+        List<MenuVO> menuList = new ArrayList<MenuVO>(0);
+        for (SysModuledef moduleDef : moduleDefList) {
+            if (!(moduleDef.getModuleid().equalsIgnoreCase(moduleDef.getParentmoduleid()))) {
+                if (moduleDef.getParentmoduleid().equalsIgnoreCase(menu.getModuleid())) {
+                    leaf = false;
+                    menuVO = new MenuVO();
+                    menuVO.setText(moduleDef.getName());
+                    menuVO.setIconCls(moduleDef.getIcon());
+                    menuVO.setModuleid(moduleDef.getModuleid());
+                    menuVO.setUrl(moduleDef.getUrl());
+                    menuVO.setChildren(selectChildren(menuVO, moduleDefList));
+                    menuList.add(menuVO);
+                }
+            }
+        }
+        menu.setLeaf(leaf);
         return menuList;
     }
 

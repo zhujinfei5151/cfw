@@ -1,5 +1,6 @@
 package org.cfw.web.sys;
 
+import java.util.Date;
 import java.util.List;
 
 import org.cfw.biz.sys.model.SysRole;
@@ -19,6 +20,8 @@ public class RolesAction extends BaseAction {
     }
 
     public String query() {
+        String root = getRequest().getParameter("root");
+        String nodeId = getRequest().getParameter("nodeId");
         roleList = roleService.query();
         return SUCCESS;
     }
@@ -34,6 +37,19 @@ public class RolesAction extends BaseAction {
 
     public List<MenuVO> getMenuList() {
         return menuList;
+    }
+
+    public String addRole() {
+        String name = getRequest().getParameter("name");
+        String comment = getRequest().getParameter("comment");
+        SysRole sysrole = new SysRole();
+        sysrole.setComment(comment);
+        sysrole.setCreateaccount("admin");
+        sysrole.setCreatetime(new Date());
+        sysrole.setName(name);
+
+        roleService.insertRole(sysrole);
+        return SUCCESS;
     }
 
     public void setRoleService(RoleService roleService) {

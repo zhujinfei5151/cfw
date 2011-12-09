@@ -6,6 +6,7 @@
     <result column="NAME" property="name" jdbcType="VARCHAR" />
     <result column="CREATETIME" property="createtime" jdbcType="TIMESTAMP" />
     <result column="CREATEACCOUNT" property="createaccount" jdbcType="VARCHAR" />
+    <result column="ROLECOMMENT" property="comment" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
@@ -66,7 +67,7 @@
     </where>
   </sql>
   <sql id="Base_Column_List" >
-    ROLEID, NAME, CREATETIME, CREATEACCOUNT
+    ROLEID, NAME, CREATETIME, CREATEACCOUNT,ROLECOMMENT
   </sql>
   <select id="selectByExample" resultMap="BaseResultMap" parameterType="org.cfw.biz.sys.model.SysRoleExample" >
     select
@@ -99,22 +100,17 @@
     </if>
   </delete>
   <insert id="insert" parameterType="org.cfw.biz.sys.model.SysRole" >
-    insert into CFW.SYS_ROLE (ROLEID, NAME, 
+    insert into CFW.SYS_ROLE (ROLEID, NAME,ROLECOMMENT 
       CREATETIME, CREATEACCOUNT)
-    values (#{roleid,jdbcType=DECIMAL}, #{name,jdbcType=VARCHAR},  
-      #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR})
+    values (seq_sys_role.nextval, #{name,jdbcType=VARCHAR},  
+      #{createtime,jdbcType=TIMESTAMP}, #{createaccount,jdbcType=VARCHAR},#{comment,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="org.cfw.biz.sys.model.SysRole" >
     insert into CFW.SYS_ROLE
     <trim prefix="(" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
         ROLEID,
-      </if>
       <if test="name != null" >
         NAME,
-      </if>
-      <if test="parentroleid != null" >
-        PARENTROLEID,
       </if>
       <if test="createtime != null" >
         CREATETIME,
@@ -122,11 +118,12 @@
       <if test="createaccount != null" >
         CREATEACCOUNT,
       </if>
+      <if test="comment != null">
+        ROLECOMMENT
+      </if>
     </trim>
     <trim prefix="values (" suffix=")" suffixOverrides="," >
-      <if test="roleid != null" >
-        #{roleid,jdbcType=DECIMAL},
-      </if>
+     seq_sys_role.nextval,
       <if test="name != null" >
         #{name,jdbcType=VARCHAR},
       </if>
@@ -136,6 +133,9 @@
       <if test="createaccount != null" >
         #{createaccount,jdbcType=VARCHAR},
       </if>
+      <if test="comment != null">
+        #{comment,jdbcType=VARCHAR}
+      </if> 
     </trim>
   </insert>
   <select id="countByExample" parameterType="org.cfw.biz.sys.model.SysRoleExample" resultType="java.lang.Integer" >
@@ -153,14 +153,14 @@
       <if test="record.name != null" >
         NAME = #{record.name,jdbcType=VARCHAR},
       </if>
-      <if test="record.parentroleid != null" >
-        PARENTROLEID = #{record.parentroleid,jdbcType=DECIMAL},
-      </if>
       <if test="record.createtime != null" >
         CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
       </if>
       <if test="record.createaccount != null" >
         CREATEACCOUNT = #{record.createaccount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.rolecomment != null">
+        ROLECOMMENT = #{record.rolecomment,jdbcType=VARCHAR},
       </if>
     </set>
     <if test="_parameter != null" >
@@ -171,9 +171,9 @@
     update CFW.SYS_ROLE
     set ROLEID = #{record.roleid,jdbcType=DECIMAL},
       NAME = #{record.name,jdbcType=VARCHAR},
-      PARENTROLEID = #{record.parentroleid,jdbcType=DECIMAL},
       CREATETIME = #{record.createtime,jdbcType=TIMESTAMP},
-      CREATEACCOUNT = #{record.createaccount,jdbcType=VARCHAR}
+      CREATEACCOUNT = #{record.createaccount,jdbcType=VARCHAR},
+      ROLECOMMENT = #{record.rolecomment,jdbcType=VARCHAR},
     <if test="_parameter != null" >
       <include refid="Update_By_Example_Where_Clause" />
     </if>
@@ -190,6 +190,9 @@
       <if test="createaccount != null" >
         CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR},
       </if>
+      <if test="rolecomment != null">
+        ROLECOMMENT = #{rolecomment,jdbcType=VARCHAR},
+      </if>
     </set>
     where ROLEID = #{roleid,jdbcType=DECIMAL}
   </update>
@@ -197,7 +200,8 @@
     update CFW.SYS_ROLE
     set NAME = #{name,jdbcType=VARCHAR},
       CREATETIME = #{createtime,jdbcType=TIMESTAMP},
-      CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR}
+      CREATEACCOUNT = #{createaccount,jdbcType=VARCHAR},
+      ROLECOMMENT = #{comment,jdbcType=VARCHAR}
     where ROLEID = #{roleid,jdbcType=DECIMAL}
   </update>
 </mapper>

@@ -235,6 +235,76 @@ public class SysRoleExample {
             return (Criteria) this;
         }
 
+        public Criteria andRoleCommentIsNull() {
+            addCriterion("ROLECOMMENT is null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentIsNotNull() {
+            addCriterion("ROLECOMMENT is not null");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentEqualTo(String value) {
+            addCriterion("ROLECOMMENT =", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentNotEqualTo(String value) {
+            addCriterion("ROLECOMMENT <>", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentGreaterThan(String value) {
+            addCriterion("ROLECOMMENT >", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentGreaterThanOrEqualTo(String value) {
+            addCriterion("ROLECOMMENT >=", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentLessThan(String value) {
+            addCriterion("ROLECOMMENT <", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentLessThanOrEqualTo(String value) {
+            addCriterion("ROLECOMMENT <=", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentLike(String value) {
+            addCriterion("ROLECOMMENT like", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentNotLike(String value) {
+            addCriterion("ROLECOMMENT not like", value, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentIn(List<String> values) {
+            addCriterion("ROLECOMMENT in", values, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentNotIn(List<String> values) {
+            addCriterion("ROLECOMMENT not in", values, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentBetween(String value1, String value2) {
+            addCriterion("ROLECOMMENT between", value1, value2, "rolecomment");
+            return (Criteria) this;
+        }
+
+        public Criteria andRoleCommentNotBetween(String value1, String value2) {
+            addCriterion("ROLECOMMENT not between", value1, value2, "rolecomment");
+            return (Criteria) this;
+        }
+
         public Criteria andParentroleidIsNull() {
             addCriterion("PARENTROLEID is null");
             return (Criteria) this;
