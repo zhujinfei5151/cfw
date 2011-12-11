@@ -24,7 +24,7 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 					useArrows : true,
 					store : new cfw.sys.store.MenuStore(),
 					rootVisible : false,
-					singleExpand : true,
+					singleExpand : false,
 					region : 'center',
 					collapsible : true,
 					columns : [{

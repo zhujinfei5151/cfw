@@ -11,10 +11,24 @@
         <action name="tab" class="homeAction" method="tab">
             <result name="success">/Ext/TabNav.jsp</result>
         </action>
+        <action name="logout" class="loginAction" method="logout">
+			<result name="login">/Ext/login.jsp</result>
+		</action>
+		
+        <action name="index" class="loginAction" method="index">
+			<result name="success">/Ext/index.jsp</result>
+			<result name="login">/Ext/login.jsp</result>
+		</action>	
+        <action name="index_gray" class="loginAction" method="indexGray">
+			<result name="success">/Ext/index.jsp</result>
+		</action>
+		<action name="index_access" class="loginAction" method="indexAccess">
+			<result name="success">/Ext/index.jsp</result>
+		</action>	 
 	</package>
 	
 	<package name="jsonIndex" namespace="/" extends="json-base">
-        <action name="menu" class="loginAction" method="menu">
+        <action name="menu" class="homeAction" method="menu">
             <result type="json" >
             	<param name="root">menuList</param>
             </result>
