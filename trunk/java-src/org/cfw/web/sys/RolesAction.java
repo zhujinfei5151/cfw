@@ -9,9 +9,10 @@ import net.sf.json.JSONObject;
 
 import org.cfw.biz.sys.model.SysRole;
 import org.cfw.biz.sys.model.SysRoleModule;
-import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.biz.sys.service.RoleService;
+import org.cfw.common.util.StringUtil;
 import org.cfw.common.vo.MenuVO;
+import org.cfw.common.vo.WebUserVO;
 import org.cfw.web.common.BaseAction;
 
 @SuppressWarnings("serial")
@@ -28,16 +29,21 @@ public class RolesAction extends BaseAction {
 
     public String query() {
         // account
-        roleList = roleService.queryByCreateAccount("test1");
+        String account = getCurrentAccount();
+        roleList = roleService.queryByCreateAccount(account);
         for (SysRole role : roleList) {
             role.setRoleModuleList(roleService.selectSysRoleModuleList(role.getRoleid()));
         }
         return SUCCESS;
     }
 
-    public String menu() {
-        // roleid
-        menuList = roleService.menu((short) 2);
+    public String menu() throws Exception {
+        WebUserVO user = getCurrentUser();
+        if (isAdmin()) {// 超级管理员不过滤功能模块
+            menuList = roleService.menu(null);
+        } else {
+            menuList = roleService.menu(user.getRoleId());
+        }
         return SUCCESS;
     }
 
@@ -59,7 +65,7 @@ public class RolesAction extends BaseAction {
         sysrole.setRoleid(roleid);
         sysrole.setRolecomment(comment);
         // account
-        sysrole.setCreateaccount("test1");
+        sysrole.setCreateaccount(getCurrentAccount());
         sysrole.setCreatetime(new Date());
         sysrole.setName(name);
         roleService.insertRole(sysrole);
@@ -73,7 +79,11 @@ public class RolesAction extends BaseAction {
         for (int i = 0; i < size; i++) {
             jsonObject = jsonArray.getJSONObject(i);
             sysRoleModule = new SysRoleModule();
-            sysRoleModule.setMask(Short.parseShort(jsonObject.getString("mask")));
+
+            String mask = jsonObject.getString("mask");
+            if (StringUtil.isEmpty(mask)) continue;
+            sysRoleModule.setMask(Short.valueOf(mask));
+
             sysRoleModule.setModuleid(jsonObject.getString("moduleid"));
             sysRoleModule.setRoleid(roleid);
             sysRoleModuleList.add(sysRoleModule);
@@ -87,7 +97,7 @@ public class RolesAction extends BaseAction {
         String data = getRequest().getParameter("data");
         String name = getRequest().getParameter("name");
         String comment = getRequest().getParameter("rolecomment");
-        
+
         SysRole sysrole = new SysRole();
         sysrole.setRoleid(roleid);
         sysrole.setRolecomment(comment);
@@ -97,30 +107,31 @@ public class RolesAction extends BaseAction {
         List<SysRoleModule> sysRoleModuleList = new ArrayList<SysRoleModule>();
         SysRoleModule sysRoleModule;
         JSONObject jsonObject;
-        
+
         JSONArray jsonArray = JSONArray.fromObject(data);
         int size = jsonArray.size();
-        for(int i = 0;i < size;i++){
+        for (int i = 0; i < size; i++) {
             jsonObject = jsonArray.getJSONObject(i);
             sysRoleModule = new SysRoleModule();
-            sysRoleModule.setMask(Short.parseShort(jsonObject.getString("mask")));
+
+            String mask = jsonObject.getString("mask");
+            if (StringUtil.isEmpty(mask) || mask.equals("0")) continue;
+            sysRoleModule.setMask(Short.valueOf(mask));
+
             sysRoleModule.setModuleid(jsonObject.getString("moduleid"));
             sysRoleModule.setRoleid(roleid);
             sysRoleModuleList.add(sysRoleModule);
         }
-        roleService.updateRoleModuleList(sysRoleModuleList);
+        roleService.updateRoleModuleList(roleid, sysRoleModuleList);
 
         return SUCCESS;
     }
 
-    public String removeRole(){
-        SysRoleModuleExample example = new SysRoleModuleExample();
-        SysRoleModuleExample.Criteria cr = example.createCriteria();
-        cr.andRoleidEqualTo(roleid);
-        roleService.deleteRoleModuleByExample(example);
+    public String removeRole() {
+        roleService.deleteRoleModuleByRoleID(roleid);
 
         roleService.deleteRoleByRoleID(roleid);
-        
+
         return SUCCESS;
     }
 

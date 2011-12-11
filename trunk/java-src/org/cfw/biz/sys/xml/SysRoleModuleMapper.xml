@@ -178,4 +178,25 @@
     where MODULEID = #{moduleid,jdbcType=VARCHAR}
       and ROLEID = #{roleid,jdbcType=DECIMAL}
   </update>
+  
+  
+  <resultMap id="ModuledefMap" type="org.cfw.biz.sys.model.SysModuledef" >
+    <id column="MODULEID" property="moduleid" jdbcType="VARCHAR" />
+    <result column="SYSTEMID" property="systemid" jdbcType="DECIMAL" />
+    <result column="NAME" property="name" jdbcType="VARCHAR" />
+    <result column="MASK" property="mask" jdbcType="DECIMAL" />
+    <result column="IPGROUPID" property="ipgroupid" jdbcType="DECIMAL" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="PARENTMODULEID" property="parentmoduleid" jdbcType="VARCHAR" />
+    <result column="SORTNO" property="sortno" jdbcType="DECIMAL" />
+    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+    <result column="NOTE" property="note" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectModuledefByRoleID" resultMap="ModuledefMap" parameterType="java.lang.Short" >
+    select moduledef.MODULEID, moduledef.SYSTEMID, moduledef.NAME, rolemodule.MASK, moduledef.IPGROUPID, moduledef.URL, moduledef.PARENTMODULEID, moduledef.SORTNO, moduledef.ICON, moduledef.NOTE
+    from CFW.SYS_MODULEDEF moduledef,CFW.SYS_ROLEMODULE rolemodule
+    where rolemodule.MODULEID = moduledef.MODULEID
+    and   rolemodule.MASK > 0
+    and	  rolemodule.ROLEID = #{roleid,jdbcType=DECIMAL}
+  </select>
 </mapper>

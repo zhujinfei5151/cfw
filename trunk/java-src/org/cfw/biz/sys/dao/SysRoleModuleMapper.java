@@ -1,12 +1,15 @@
 package org.cfw.biz.sys.dao;
 
 import java.util.List;
+
 import org.apache.ibatis.annotations.Param;
+import org.cfw.biz.sys.model.SysModuledef;
 import org.cfw.biz.sys.model.SysRoleModule;
 import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.biz.sys.model.SysRoleModuleKey;
 
 public interface SysRoleModuleMapper {
+
     int countByExample(SysRoleModuleExample example);
 
     int deleteByExample(SysRoleModuleExample example);
@@ -28,4 +31,6 @@ public interface SysRoleModuleMapper {
     int updateByPrimaryKeySelective(SysRoleModule record);
 
     int updateByPrimaryKey(SysRoleModule record);
+
+    List<SysModuledef> selectModuledefByRoleID(Short roleid);
 }

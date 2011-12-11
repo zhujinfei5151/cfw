@@ -94,13 +94,6 @@
     from CFW.SYS_MODULEDEF
     where MODULEID = #{moduleid,jdbcType=VARCHAR}
   </select>
-  <select id="selectByRoleID" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select moduledef.MODULEID, moduledef.SYSTEMID, moduledef.NAME, rolemodule.MASK, moduledef.IPGROUPID, moduledef.URL, moduledef.PARENTMODULEID, moduledef.SORTNO, moduledef.ICON, moduledef.NOTE
-    from CFW.SYS_MODULEDEF moduledef,CFW.SYS_ROLEMODULE rolemodule
-    where rolemodule.ROLEID = #{roleid,jdbcType=DECIMAL}
-    and   rolemodule.MODULEID = moduledef.MODULEID
-    and   rolemodule.MASK > 0
-  </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
     delete from CFW.SYS_MODULEDEF
     where MODULEID = #{moduleid,jdbcType=VARCHAR}

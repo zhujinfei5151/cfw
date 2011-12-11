@@ -4,14 +4,13 @@ import java.util.List;
 
 import org.cfw.biz.sys.model.SysRole;
 import org.cfw.biz.sys.model.SysRoleModule;
-import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.common.vo.MenuVO;
 
 public interface RoleService {
 
     List<SysRole> queryByCreateAccount(String createAccount);
 
-    List<MenuVO> menu(short roleid);
+    List<MenuVO> menu(Short roleid) throws Exception;
 
     void insertRole(SysRole sysRole);
 
@@ -21,9 +20,9 @@ public interface RoleService {
 
     void insertRoleModuleList(List<SysRoleModule> sysRoleModuleList);
 
-    void updateRoleModuleList(List<SysRoleModule> sysRoleModuleList);
+    void updateRoleModuleList(short roleid, List<SysRoleModule> sysRoleModuleList);
 
-    void deleteRoleModuleByExample(SysRoleModuleExample example);
+    void deleteRoleModuleByRoleID(short roleid);
 
     short selectSeqSysRoleID();
 
