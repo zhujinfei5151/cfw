@@ -22,13 +22,25 @@ function init() {
 		alert('helpBtn clicked.')
 	});
 	logoutBtn.on('click',function(){
-		alert('logoutBtn clicked.')
+		window.location.href = 'logout.action';
 	});
 	
 	var modifyAccountBtn = Ext.getCmp('modifyAccountBtn');
 	modifyAccountBtn.on('click',function(){
 		alert('modifyAccountBtn clicked.')
 	});
+	
+	var themeCombo = Ext.getCmp("themeCombo");
+	themeCombo.on('change',onThemeComboChange);
+	if(currentTheme == 'ext-all') {
+		themeCombo.setValue('index.action');
+	} else if(currentTheme == 'ext-all-gray') {
+		themeCombo.setValue('index_gray.action');
+	} else if(currentTheme == 'ext-all-access') {
+		themeCombo.setValue('index_access.action');
+	} else {
+		themeCombo.setValue('index.action');
+	}
 }
 
 function loadMenu() {
@@ -117,4 +129,12 @@ function onLoadMenu(menuItems) {
 function onItemClick(item) {
 	var moduleLoader = Ext.get('moduleLoader').dom;
 	moduleLoader.src = item.url;
+}
+
+function onThemeComboChange(field,newValue,oldValue,options) {
+    currentPath = window.location.pathname,
+    isCurrent = currentPath.match(newValue);
+	if (!isCurrent) {
+	    window.location = newValue;
+	}
 }

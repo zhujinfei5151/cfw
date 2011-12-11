@@ -26,7 +26,15 @@ function loginUser() {
 			waitMsg : "请稍等，正在登录...",
 			waitTitle : "正在验证",
 			success : function(form, action) {
-				window.location.href = '/cfw/Ext/index.jsp';
+				if (currentTheme == 'ext-all') {
+					window.location.href = 'index.action';
+				} else if (currentTheme == 'ext-all-gray') {
+					window.location.href = 'index_gray.action';
+				} else if (currentTheme == 'ext-all-access') {
+					window.location.href = 'index_access.action';
+				} else {
+					window.location.href = 'index.action';
+				}
 			},
 			failure : function(form, action) {
 				// resetUser();

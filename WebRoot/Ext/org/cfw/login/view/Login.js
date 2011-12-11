@@ -12,16 +12,17 @@ Ext.define('cfw.login.view.Login', {
 			isLoader : true,
 			blankText : '验证码不能为空',
 			codeUrl : 'checkcode_init.action',
-			width : 160,
+			width : 240,
 			height : 23
 		});
 		var form = Ext.widget('form', {
 			id : 'form',
+			frame : true,
 			border : false,
 			bodyPadding : 10,
 			fieldDefaults : {
-				labelAlign : 'left',
-				labelWidth : 55,
+				labelAlign : 'right',
+				labelWidth : 80,
 				labelStyle : 'font-weight:bold'
 			},
 			defaults : {
@@ -56,7 +57,7 @@ Ext.define('cfw.login.view.Login', {
 
 		Ext.apply(this, {
 			height : 200,
-			width : 300,
+			width : 400,
 			title : '用户登录',
 			closeAction : 'hide',
 			closable : false,

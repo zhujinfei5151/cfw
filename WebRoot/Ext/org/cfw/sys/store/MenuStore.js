@@ -6,8 +6,6 @@ Ext.define('cfw.sys.store.MenuStore', {
 	    id: 'root',
 	    expanded: true
 	},
-//	defaultRootId : 'root',
-	autoLoad : false,
 	proxy: {
 	    type: 'ajax',
 	    url: 'sys/role_menu.action',

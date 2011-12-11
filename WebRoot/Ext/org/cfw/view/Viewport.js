@@ -48,32 +48,53 @@ Ext.define('cfw.view.ui.Viewport', {
 				} ],
 				items : [ {
 					xtype : 'container',
-					region : 'center'
+					region : 'center',
+					style : 'background-image:url(resources/images/title_bg.jpg)'
 				}, {
-					xtype : 'panel',
-					width : 160,
+					xtype : 'form',
+					frame : true,
+					width : 220,
 					region : 'east',
 					dockedItems : [ {
 						xtype : 'toolbar',
-						dock : 'bottom',
+						dock : 'top',
 						items : [ {
 							xtype : 'button',
+							icon : 'resources/images/home.gif',
 							text : '首 页',
 							id : 'homepageBtn'
 						}, {
 							xtype : 'tbseparator'
 						}, {
 							xtype : 'button',
+							icon : 'resources/images/help.gif',
 							text : '帮 助',
 							id : 'helpBtn'
 						}, {
 							xtype : 'tbseparator'
 						}, {
 							xtype : 'button',
+							icon : 'resources/images/logout.gif',
 							text : '注 销',
 							id : 'logoutBtn'
 						} ]
-					} ]
+					} ],
+					layout: 'anchor',
+					bodyPadding : 5,
+					defaults: {
+						anchor: '90%',
+						labelAlign : 'right',
+						labelWidth : 50
+					},
+					items : [{
+						xtype : 'combo',
+						fieldLabel : '主题',
+						id : 'themeCombo',
+						displayField : 'display',
+						valueField : 'value',
+						editable : false,
+						store : new org.cfw.store.ThemeStore()
+					}]
 				} ]
 			} ]
 		});
