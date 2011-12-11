@@ -1,58 +1,34 @@
 package org.cfw.biz.service.impl;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.cfw.biz.service.LoginService;
 import org.cfw.biz.sys.dao.SysAccountMapper;
+import org.cfw.biz.sys.dao.SysRoleModuleMapper;
 import org.cfw.biz.sys.model.SysAccount;
-import org.cfw.biz.sys.model.SysModuledef;
-import org.cfw.common.CachedVOUtil;
-import org.cfw.common.vo.MenuVO;
+import org.cfw.biz.sys.model.SysRoleModule;
+import org.cfw.biz.sys.model.SysRoleModuleExample;
+import org.cfw.common.vo.ModulePermitVO;
 
 public class LoginServiceImpl implements LoginService {
 
-    private SysAccountMapper sysAccountMapper;
+    private SysAccountMapper    sysAccountMapper;
+    private SysRoleModuleMapper sysRoleModuleMapper;
 
-    public List<MenuVO> constructMenu() {
-        List<MenuVO> menuList = constructMainMenu();
-        for (MenuVO vo : menuList) {
-            vo.setMenus(constructSubMenu(vo.getModuleid()));
+    public List<ModulePermitVO> selectSysRoleModuleList(short roleid) {
+        SysRoleModuleExample example = new SysRoleModuleExample();
+        SysRoleModuleExample.Criteria cr = example.createCriteria();
+        cr.andRoleidEqualTo(roleid);
+        List<SysRoleModule> roleModuleList = sysRoleModuleMapper.selectByExample(example);
+        List<ModulePermitVO> moduleList = new LinkedList<ModulePermitVO>();
+        for (SysRoleModule roleModule : roleModuleList) {
+            ModulePermitVO vo = new ModulePermitVO();
+            vo.setModuleid(roleModule.getModuleid());
+            vo.setMask(roleModule.getMask());
+            moduleList.add(vo);
         }
-        return menuList;
-    }
-
-    private List<MenuVO> constructMainMenu() {
-        List<MenuVO> menuList = new ArrayList<MenuVO>();
-        List<SysModuledef> moduledefList = CachedVOUtil.getModuledefList();
-        for (SysModuledef moduledef : moduledefList) {
-            if (moduledef.getParentmoduleid().equals(moduledef.getModuleid())) {
-                MenuVO vo = new MenuVO();
-                vo.setText(moduledef.getName());
-                vo.setIconCls(moduledef.getIcon());
-                vo.setModuleid(moduledef.getModuleid());
-                vo.setUrl(moduledef.getUrl());
-                menuList.add(vo);
-            }
-        }
-        return menuList;
-    }
-
-    private List<MenuVO> constructSubMenu(String moduleid) {
-        List<MenuVO> menuList = new ArrayList<MenuVO>();
-        List<SysModuledef> moduledefList = CachedVOUtil.getModuledefList();
-        for (SysModuledef moduledef : moduledefList) {
-            if (!moduledef.getParentmoduleid().equals(moduledef.getModuleid())
-                && moduledef.getParentmoduleid().equals(moduleid)) {
-                MenuVO vo = new MenuVO();
-                vo.setText(moduledef.getName());
-                vo.setIconCls(moduledef.getIcon());
-                vo.setModuleid(moduledef.getModuleid());
-                vo.setUrl(moduledef.getUrl());
-                menuList.add(vo);
-            }
-        }
-        return menuList;
+        return moduleList;
     }
 
     public SysAccount selectByAccount(String account) {
@@ -61,6 +37,10 @@ public class LoginServiceImpl implements LoginService {
 
     public void setSysAccountMapper(SysAccountMapper sysAccountMapper) {
         this.sysAccountMapper = sysAccountMapper;
+    }
+
+    public void setSysRoleModuleMapper(SysRoleModuleMapper sysRoleModuleMapper) {
+        this.sysRoleModuleMapper = sysRoleModuleMapper;
     }
 
 }

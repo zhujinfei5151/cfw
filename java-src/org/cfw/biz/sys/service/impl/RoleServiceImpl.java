@@ -3,7 +3,6 @@ package org.cfw.biz.sys.service.impl;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.cfw.biz.sys.dao.SysModuledefMapper;
 import org.cfw.biz.sys.dao.SysRoleMapper;
 import org.cfw.biz.sys.dao.SysRoleModuleMapper;
 import org.cfw.biz.sys.model.SysModuledef;
@@ -12,13 +11,13 @@ import org.cfw.biz.sys.model.SysRoleExample;
 import org.cfw.biz.sys.model.SysRoleModule;
 import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.biz.sys.service.RoleService;
+import org.cfw.common.CachedVOUtil;
 import org.cfw.common.vo.MenuVO;
 
 public class RoleServiceImpl implements RoleService {
 
-    private SysRoleMapper sysRoleMapper;
+    private SysRoleMapper       sysRoleMapper;
     private SysRoleModuleMapper sysRoleModuleMapper;
-    private SysModuledefMapper  sysModuledefMapper;
 
     public List<SysRole> queryByCreateAccount(String createAccount) {
         SysRoleExample example = new SysRoleExample();
@@ -45,13 +44,17 @@ public class RoleServiceImpl implements RoleService {
         }
     }
 
-    public void updateRoleModuleList(List<SysRoleModule> sysRoleModuleList) {
+    public void updateRoleModuleList(short roleid, List<SysRoleModule> sysRoleModuleList) {
+        deleteRoleModuleByRoleID(roleid);
         for (SysRoleModule sysRoleModule : sysRoleModuleList) {
-            sysRoleModuleMapper.updateByPrimaryKeySelective(sysRoleModule);
+            sysRoleModuleMapper.insert(sysRoleModule);
         }
     }
 
-    public void deleteRoleModuleByExample(SysRoleModuleExample example) {
+    public void deleteRoleModuleByRoleID(short roleid) {
+        SysRoleModuleExample example = new SysRoleModuleExample();
+        SysRoleModuleExample.Criteria cr = example.createCriteria();
+        cr.andRoleidEqualTo(roleid);
         sysRoleModuleMapper.deleteByExample(example);
     }
 
@@ -62,11 +65,15 @@ public class RoleServiceImpl implements RoleService {
         return sysRoleModuleMapper.selectByExample(example);
     }
 
-    public List<MenuVO> menu(short roleid) {
+    public List<MenuVO> menu(Short roleid) throws Exception {
         List<MenuVO> menuList = new ArrayList<MenuVO>();
         MenuVO menuVO;
-        List<SysModuledef> moduledefList = sysModuledefMapper.selectByRoleID(roleid);
-
+        List<SysModuledef> moduledefList = null;
+        if (roleid == null) {
+            moduledefList = CachedVOUtil.getModuledefList();
+        } else {
+            moduledefList = sysRoleModuleMapper.selectModuledefByRoleID(roleid);
+        }
         for (SysModuledef moduledef : moduledefList) {
             if (moduledef.getModuleid().equalsIgnoreCase(moduledef.getParentmoduleid())) {
                 menuVO = new MenuVO();
@@ -115,10 +122,6 @@ public class RoleServiceImpl implements RoleService {
 
     public void setSysRoleModuleMapper(SysRoleModuleMapper sysRoleModuleMapper) {
         this.sysRoleModuleMapper = sysRoleModuleMapper;
-    }
-
-    public void setSysModuledefMapper(SysModuledefMapper sysModuledefMapper) {
-        this.sysModuledefMapper = sysModuledefMapper;
     }
 
 }
