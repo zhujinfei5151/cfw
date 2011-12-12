@@ -7,23 +7,25 @@ public class SysAccount {
 
     private String name;
 
-    private Short password;
+    private Short  password;
 
-    private Short roleid;
+    private Short  roleid;
 
-    private Short sex;
+    private Short  sex;
 
     private String telephone;
 
     private String position;
 
-    private Date createtime;
+    private Date   createtime;
 
     private String createaccount;
 
     private String homepage;
 
     private String email;
+
+    private String note;
 
     public String getAccount() {
         return account;
@@ -112,4 +114,13 @@ public class SysAccount {
     public void setEmail(String email) {
         this.email = email == null ? null : email.trim();
     }
+
+    public String getNote() {
+        return note;
+    }
+
+    public void setNote(String note) {
+        this.note = note == null ? null : note.trim();
+    }
+
 }
