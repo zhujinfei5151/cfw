@@ -23,5 +23,14 @@
         <action name="role_*" class="rolesAction" method="{1}">
             <result type="json"></result>
         </action>
+        <action name="account_query" class="accountsAction" method="query">
+        	<result type="json">
+        		<param name="root">accountList</param>
+        	</result>
+        </action>
+        <action name="account_add" class="accountsAction" method="add">
+        	<result type="json">
+        	</result>
+        </action>
 	</package>
 </struts>
