@@ -20,13 +20,13 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {
 				items : [ {
 					xtype : 'treepanel',
 					id : 'modulegrid',
+					title : '系统功能',
 					width : 400,
 					useArrows : true,
 					store : new cfw.sys.store.MenuStore(),
 					rootVisible : false,
 					singleExpand : false,
 					region : 'center',
-					collapsible : true,
 					columns : [{
 						xtype : 'treecolumn',
 						text : '功能名称',
