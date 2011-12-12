@@ -15,4 +15,5 @@
 	default-autowire="byName">
 	
 	<bean id="rolesAction" class="org.cfw.web.sys.RolesAction"/>
+	<bean id="accountsAction" class="org.cfw.web.sys.AccountsAction"/>
 </beans>
