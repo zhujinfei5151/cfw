@@ -15,4 +15,7 @@
 	default-autowire="byName">
 	
 	<bean id="roleService" class="org.cfw.biz.sys.service.impl.RoleServiceImpl"></bean>
+	<bean id="accountService" class="org.cfw.biz.sys.service.impl.AccountServiceImpl">
+		<property name="sysAccountMapper" ref="sysAccountMapper"></property>
+	</bean>
 </beans>
