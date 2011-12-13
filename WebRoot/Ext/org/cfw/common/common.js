@@ -29,3 +29,39 @@ function rightPad(string, size, character) {
     }
     return result;
 }
+
+/**
+ * 显示错误提示的对话框
+ */
+function showErrorDialog(msg) {
+	Ext.Msg.show( {
+		title :"提示",
+		msg :msg,
+		buttons :Ext.Msg.OK,
+		icon :Ext.Msg.ERROR
+	});
+}
+
+/**
+ * 显示警告对话框
+ */
+function showWarningDialog(msg) {
+	Ext.Msg.show( {
+		title :"提示",
+		msg :msg,
+		buttons :Ext.Msg.OK,
+		icon :Ext.Msg.WARNING
+	});
+}
+
+/**
+ * 显示提示信息的对话框
+ */
+function showInfoDialog(msg) {
+	Ext.Msg.show( {
+		title :"提示",
+		msg :msg,
+		buttons :Ext.Msg.OK,
+		icon :Ext.Msg.INFO
+	});
+}
