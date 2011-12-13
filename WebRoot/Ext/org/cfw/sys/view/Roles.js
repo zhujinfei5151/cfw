@@ -1,4 +1,4 @@
-Ext.define('cfw.sys.view.ui.RolesViewport', {
+Ext.define('cfw.sys.view.ui.RolesViewport', {//该路径与control里的new有关(var vp = new cfw.sys.view.ui.RolesViewport({)
 	extend : 'Ext.container.Viewport',
 
 	layout : {
