@@ -13,6 +13,8 @@ import com.opensymphony.xwork2.ActionSupport;
 
 public class BaseAction extends ActionSupport {
 
+    protected String errorMsg;
+
     public HttpServletRequest getRequest() {
         return ServletActionContext.getRequest();
     }
