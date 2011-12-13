@@ -8,7 +8,7 @@ Ext.define('cfw.store.MenuTreeStore', {
     },
     proxy: {
         type: 'ajax',
-        url : 'data/ModuleNodes.json',
+        url : 'submenu.action',
         reader: {
             type: 'json',
             root: 'nodes',

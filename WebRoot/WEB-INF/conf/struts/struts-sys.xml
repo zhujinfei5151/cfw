@@ -7,6 +7,9 @@
         <action name="roles_init" class="rolesAction" method="init">
 			<result name="success">/Ext/org/cfw/sys/Roles.jsp</result>
         </action>
+        <action name="accounts_init" class="accountsAction" method="init">
+			<result name="success">/Ext/org/cfw/sys/Accounts.jsp</result>
+        </action>
 	</package>
 	
 	<package name="jsonSys" namespace="/sys" extends="json-base">

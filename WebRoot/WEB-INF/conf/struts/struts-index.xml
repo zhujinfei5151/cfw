@@ -3,17 +3,38 @@
     "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
     "http://struts.apache.org/dtds/struts-2.0.dtd">
 <struts>
-	<package name="index" namespace="/" extends="struts-base">
+	<package name="entry" namespace="/" extends="struts-default">
         <action name="init" class="loginAction" method="init">
             <result name="ext.index">/Ext/index.jsp</result>
             <result name="ext.login">/Ext/login.jsp</result>
         </action>
-        <action name="tab" class="homeAction" method="tab">
-            <result name="success">/Ext/TabNav.jsp</result>
-        </action>
         <action name="logout" class="loginAction" method="logout">
 			<result name="login">/Ext/login.jsp</result>
 		</action>
+    </package>
+    <package name="jsonEntry" namespace="/" extends="json-default">
+        <!-- 验证码图片 -->
+		<action name="checkcode_init" class="imageCodeAction">
+			<result name="success" type="stream">
+				<param name="inputName">imageStream</param>
+				<param name="bufferSize">2048</param>
+			</result>
+		</action>
+        <action name="login" class="loginAction" method="login">
+        	<result type="json"></result>
+        </action>
+    </package>
+    
+	<package name="index" namespace="/" extends="struts-base">
+        <action name="tab" class="homeAction" method="tab">
+            <result name="success">/Ext/TabNav.jsp</result>
+        </action>
+        <action name="menutree" class="homeAction" method="menutree">
+            <result name="success">/Ext/MenuTreeNav.jsp</result>
+        </action>
+        <action name="objtree" class="homeAction" method="objtree">
+            <result name="success">/Ext/ObjTreeNav.jsp</result>
+        </action>
 		
         <action name="index" class="loginAction" method="index">
 			<result name="success">/Ext/index.jsp</result>
@@ -33,20 +54,15 @@
             	<param name="root">menuList</param>
             </result>
         </action>
+        <action name="submenu" class="homeAction" method="submenu">
+            <result type="json" >
+            	<param name="root">menuList</param>
+            </result>
+        </action>
         <action name="tabstore" class="homeAction" method="tabstore">
             <result type="json" >
             	<param name="root">tabList</param>
             </result>
-        </action>
-        <!-- 验证码图片 -->
-		<action name="checkcode_init" class="imageCodeAction">
-			<result name="success" type="stream">
-				<param name="inputName">imageStream</param>
-				<param name="bufferSize">2048</param>
-			</result>
-		</action>
-        <action name="login" class="loginAction" method="login">
-        	<result type="json"></result>
         </action>
 	</package>
 </struts>
