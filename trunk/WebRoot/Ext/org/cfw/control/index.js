@@ -69,7 +69,7 @@ function onLoadMenu(menuItems) {
 						for ( var k = 0; k < thirdLen; k++) {
 							var thirdMenuItem = subMenuItem.menus[k];
 							thirdMenu.add(new Ext.menu.Item({
-								id : thirdMenuItem.menuID,
+								menuid : thirdMenuItem.moduleid,
 								text : thirdMenuItem.text,
 								type : thirdMenuItem.type,
 								icon : Ext.BLANK_IMAGE_URL,
@@ -80,7 +80,7 @@ function onLoadMenu(menuItems) {
 						}
 						// 二级菜单
 						subMenu.add(new Ext.menu.Item({
-							id : subMenuItem.menuID,
+							menuid : subMenuItem.moduleid,
 							text : subMenuItem.text,
 							type : subMenuItem.type,
 							icon : Ext.BLANK_IMAGE_URL,
@@ -92,7 +92,7 @@ function onLoadMenu(menuItems) {
 					} else {
 						// 二级菜单
 						subMenu.add(new Ext.menu.Item({
-							id : subMenuItem.menuID,
+							menuid : subMenuItem.moduleid,
 							text : subMenuItem.text,
 							type : subMenuItem.type,
 							icon : Ext.BLANK_IMAGE_URL,
@@ -104,7 +104,7 @@ function onLoadMenu(menuItems) {
 				}
 				// 一级菜单
 				menubar.add({
-					id : menuItem.menuID,
+					menuid : menuItem.moduleid,
 					text : menuItem.text,
 					type : menuItem.type,
 					iconCls : menuItem.iconCls,
@@ -113,7 +113,7 @@ function onLoadMenu(menuItems) {
 			} else {
 				// 一级菜单
 				menubar.add({
-					id : menuItem.menuID,
+					menuid : menuItem.moduleid,
 					text : menuItem.text,
 					type : menuItem.type,
 					iconCls : menuItem.iconCls
@@ -125,7 +125,9 @@ function onLoadMenu(menuItems) {
 
 function onItemClick(item) {
 	var moduleLoader = Ext.get('moduleLoader').dom;
-	moduleLoader.src = item.url;
+	var timestamp = Date.UTC(new Date());
+	moduleLoader.src = item.url + "?moduleid=" + item.menuid + "&timestamp=" + timestamp;
+	
 }
 
 function onThemeComboChange(field,newValue,oldValue,options) {

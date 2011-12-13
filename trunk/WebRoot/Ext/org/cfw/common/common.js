@@ -30,38 +30,45 @@ function rightPad(string, size, character) {
     return result;
 }
 
-/**
- * 显示错误提示的对话框
- */
-function showErrorDialog(msg) {
+function logout() {
+	showErrorDialog('您的会话已结束,请重新登录!',function() {
+		top.location = 'logout.action';
+	});
+}
+
+function accessDenied() {
+	showErrorDialog('很抱歉,您无权访问该功能!');
+}
+
+//显示提示信息的对话框
+function showInfoDialog(msg,fn) {
 	Ext.Msg.show( {
 		title :"提示",
 		msg :msg,
+		fn : fn,
+		buttons :Ext.Msg.OK,
+		icon :Ext.Msg.INFO
+	});
+}
+
+//显示错误提示的对话框
+function showErrorDialog(msg,fn) {
+	Ext.Msg.show( {
+		title :"提示",
+		msg :msg,
+		fn : fn,
 		buttons :Ext.Msg.OK,
 		icon :Ext.Msg.ERROR
 	});
 }
 
-/**
- * 显示警告对话框
- */
-function showWarningDialog(msg) {
+// 显示警告对话框
+function showWarningDialog(msg,fn) {
 	Ext.Msg.show( {
 		title :"提示",
 		msg :msg,
+		fn : fn,
 		buttons :Ext.Msg.OK,
 		icon :Ext.Msg.WARNING
-	});
-}
-
-/**
- * 显示提示信息的对话框
- */
-function showInfoDialog(msg) {
-	Ext.Msg.show( {
-		title :"提示",
-		msg :msg,
-		buttons :Ext.Msg.OK,
-		icon :Ext.Msg.INFO
 	});
 }

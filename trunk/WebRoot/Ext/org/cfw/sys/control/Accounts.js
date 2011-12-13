@@ -5,7 +5,7 @@ Ext.onReady(function() {
 		renderTo : Ext.getBody()
 	});
 	vp.show();
-	
+	vp.roleStore.load();
 	init();
 });
 
@@ -51,7 +51,7 @@ function addAccount(){
 			sex : accountForm.findField("sex").getValue(),
 			roleid : accountForm.findField("roleid").getValue(),
 			position : accountForm.findField("position").getValue(),
-			note : accountForm.findField("note").getValue(),
+			note : accountForm.findField("note").getValue()
 		},
 		success : function(response,options){
 			accountgrid.getStore().load();

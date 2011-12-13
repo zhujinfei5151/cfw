@@ -5,24 +5,37 @@
 <struts>
 	<package name="struts-base" namespace="/" extends="struts-default">
 		<interceptors>
+			<interceptor name="checkPermission" class="org.cfw.web.common.intercept.LoginOKInterceptor"></interceptor>
 			<interceptor name="catchException" class="org.cfw.web.common.intercept.ExceptionIntercept"></interceptor>
 			
 			<interceptor-stack name="commonStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="checkPermission"></interceptor-ref>
 				<interceptor-ref name="catchException"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="commonStack"></default-interceptor-ref>
+		
+		<global-results>
+			<result name="errorPage">/Ext/error.jsp</result>			
+			<result name="logout">/Ext/logout.jsp</result>						
+		</global-results>
 	</package>
 	<package name="json-base" namespace="/" extends="json-default">
 		<interceptors>
+			<interceptor name="checkPermission" class="org.cfw.web.common.intercept.JSONLogingOKInterceptor"></interceptor>
 			<interceptor name="catchException" class="org.cfw.web.common.intercept.ExceptionIntercept"></interceptor>
 			
 			<interceptor-stack name="commonStack">
 				<interceptor-ref name="defaultStack"></interceptor-ref>
+				<interceptor-ref name="checkPermission"></interceptor-ref>
 				<interceptor-ref name="catchException"></interceptor-ref>
 			</interceptor-stack>
 		</interceptors>
 		<default-interceptor-ref name="commonStack"></default-interceptor-ref>
+		
+		<global-results>	
+			<result name="logout">/Ext/jsonlogout.jsp</result>	
+		</global-results>	
 	</package>
 </struts>
