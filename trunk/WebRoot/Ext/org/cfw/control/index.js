@@ -26,10 +26,7 @@ function init() {
 	});
 	
 	var modifyAccountBtn = Ext.getCmp('modifyAccountBtn');
-	modifyAccountBtn.on('click',function(){
-		alert('modifyAccountBtn clicked.')
-	});
-	
+	modifyAccountBtn.on('click', onModifyAccount);
 	var themeCombo = Ext.getCmp("themeCombo");
 	themeCombo.on('change',onThemeComboChange);
 	if(currentTheme == 'ext-all') {
@@ -137,4 +134,69 @@ function onThemeComboChange(field,newValue,oldValue,options) {
 	if (!isCurrent) {
 	    window.location = newValue;
 	}
+}
+var modifyPasswordWindow;
+function onModifyAccount(){
+	modifyPasswordWindow = new cfw.sys.view.ModifyPasswordWindow();
+	modifyPasswordWindow.show();//该修改密码页面只有在点击“修改”按钮的时候才显示
+	
+	var modifyButton=Ext.getCmp('modify');
+	modifyButton.on('click',modifyPsw);
+	
+	var cancelButton=Ext.getCmp('cancel');
+	cancelButton.on('click',cancelPsw);
+}
+
+function modifyPsw(){
+	var form = Ext.getCmp("modifypasswordform").getForm();
+	if(!form.isValid()){//isValid--是正当的，有效的  
+		showWarningDialog("表单确认失败！");
+		return;
+	}	
+	
+	var pass1 = form.findField("newpassword").getValue();//findField()括号里填的是name值
+	var pass2 = form.findField("newpassword2").getValue();
+	var oldPass = form.findField("oldpassword").getValue();
+
+	//密码检测
+	if (Ext.isEmpty(oldPass) && Ext.isEmpty(pass1) && Ext.isEmpty(pass2)){
+
+	}else if (!Ext.isEmpty(oldPass) && !Ext.isEmpty(pass1) && !Ext.isEmpty(pass2)){
+		if (pass1 != pass2){
+			showErrorDialog("两次新密码输入不一致!");
+			form.findField("newpassword").reset();
+			form.findField("newpassword2").reset();
+			return;
+		}
+	}else{
+		showErrorDialog("原密码和新密码都不能为空!");
+		return;
+	}		
+
+	Ext.Ajax.request({//异步加载
+		url : "sys/accounts_modifyPassword.action",	
+		params : {//给action赋值
+			'oldpassword' : oldPass,
+			'newpassword' : pass1,
+			'newpassword2' : pass2
+		},
+		method : 'post',
+		success : function(response, options) {
+			var res = Ext.decode(response.responseText);//将json数据转为js脚本
+			if (res.success){
+				showInfoDialog("密码修改成功！");
+				//Ext.getCmp("passwordform").close();
+				modifyPasswordWindow.close();
+			}else{
+				showErrorDialog(res.errorMsg);					
+			}				
+		},
+		failure : function() {
+			showErrorDialog("提交失败！");
+		}		
+	});		 
+}
+
+function cancelPsw(){
+	modifyPasswordWindow.close();
 }
