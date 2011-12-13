@@ -10,4 +10,6 @@ public interface HomeService {
     List<MenuVO> constructMenu(List<ModulePermitVO> moduleList);
 
     List<MenuVO> constructTabs(String moduleid, List<ModulePermitVO> moduleList);
+
+    List<MenuVO> constructSubMenu(String moduleid, List<ModulePermitVO> moduleList);
 }
