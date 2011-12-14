@@ -45,11 +45,12 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {//该路径与control里的new有�
 							displayField : 'field1',
 							valueField : 'field2',
 							editable : false,
-							store : [['0','']],
+							queryStore : Ext.create('cfw.sys.store.MaskStore'),
+							store : [[0,'禁用']],
 							listeners : {
-								'expand' : function(queryEvent,options){
+								'beforequery' : function(queryEvent,options){
 									var maxmask = Ext.getCmp('modulegrid').getSelectionModel().selected.items[0].data.maxmask;
-									var tempstore = Ext.create('cfw.sys.store.MaskStore');
+									var tempstore = Ext.clone(this.queryStore);
 									tempstore.filterBy(function(record){
 										if(record.get('value') <= maxmask)return true;
 										else return false;
