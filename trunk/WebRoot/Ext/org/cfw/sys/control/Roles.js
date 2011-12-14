@@ -37,6 +37,14 @@ function init() {
 	modifyButton.on('click',modifyRole);
 	removeButton.on('click',removeRole);
 	
+	var root = menustore.getRootNode();
+	var children = root.childNodes;
+	Ext.Array.forEach(children,function(itemnode){
+		if(!itemnode.data.leaf){
+			getMaxFromChildren(itemnode);
+		}
+	});
+	
 	var plugin = modulegrid.getPlugin();
 	plugin.on('edit',onEdit);
 	initRole();
@@ -147,6 +155,27 @@ function getMinFromBrother(node){
 	}else{
 		return minMask;
 	}
+}
+
+/**
+ * 取子节点操作码中最大级别的操作码
+ */
+function getMaxFromChildren(node){
+	var children = node.childNodes;
+	var maxMask = 0;
+	var mask;
+	Ext.Array.forEach(children,function(itemNode){
+		if(itemNode.data.leaf){
+			mask = itemNode.data.maxmask;
+		}else{
+			mask = getMaxFromChildren(itemNode);
+		}
+		if(mask > maxMask){
+			maxMask = mask;
+		}
+	});
+	node.data.maxmask = maxMask;
+	return maxMask;
 }
 
 function addRole(){
