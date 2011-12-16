@@ -32,7 +32,7 @@ function rightPad(string, size, character) {
 
 function logout() {
 	showErrorDialog('您的会话已结束,请重新登录!',function() {
-		top.location = 'logout.action';
+		top.location = '/logout.action';
 	});
 }
 

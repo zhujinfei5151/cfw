@@ -6,4 +6,5 @@
 	<include file="../conf/struts/struts-default.xml" />
 	<include file="../conf/struts/struts-index.xml" />
 	<include file="../conf/struts/struts-sys.xml" />
+	<include file="../conf/struts/struts-demo.xml" />
 </struts>

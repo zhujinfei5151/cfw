@@ -13,6 +13,14 @@ function init() {
 
 	var resetButton = Ext.getCmp("resetButton");
 	resetButton.on('click', resetUser);
+
+	var form = Ext.getCmp("form");
+	var nav = new Ext.util.KeyNav(form.getEl(), {
+		"enter" : function(e) {
+			loginUser();
+		},
+		scope : this
+	});
 }
 
 function loginUser() {
