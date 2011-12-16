@@ -18,6 +18,11 @@
             	<param name="root">roleList</param>
             </result>
         </action>
+        <action name="role_queryAllRole" class="rolesAction" method="queryAllRole">
+            <result type="json" >
+            	<param name="root">roleList</param>
+            </result>
+        </action>
         <action name="role_menu" class="rolesAction" method="menu">
             <result type="json" >
             	<param name="root">menuList</param>
@@ -29,13 +34,9 @@
         <action name="accounts_*" class="accountsAction" method="{1}">
             <result type="json"></result>
         </action>
-        <action name="account_query" class="accountsAction" method="query">
+        <action name="accounts_query" class="accountsAction" method="query">
         	<result type="json">
         		<param name="root">accountList</param>
-        	</result>
-        </action>
-        <action name="account_add" class="accountsAction" method="add">
-        	<result type="json">
         	</result>
         </action>	
 	</package>
