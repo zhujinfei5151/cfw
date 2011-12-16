@@ -3,7 +3,7 @@ Ext.define('cfw.sys.store.AccountStore',{
 	model:'cfw.sys.model.Account',
 	proxy:{
 		type:'ajax', 
-		url : 'sys/account_query.action',
+		url : 'sys/accounts_query.action',
 		reader:'json'
 	}
 });
