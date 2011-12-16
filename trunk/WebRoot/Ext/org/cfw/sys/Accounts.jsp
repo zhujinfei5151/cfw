@@ -15,7 +15,7 @@
 <script type="text/javascript" src="Ext/org/cfw/sys/model/Sex.js"></script>
 <script type="text/javascript" src="Ext/org/cfw/sys/model/Role.js"></script>
 
-<title>Insert title here</title>
+<title>帐号管理</title>
 <script type="text/javascript">
 	Ext.Loader.setConfig({
 		enabled : true
