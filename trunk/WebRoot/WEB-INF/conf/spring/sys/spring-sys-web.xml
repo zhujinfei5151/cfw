@@ -14,6 +14,6 @@
       http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
 	default-autowire="byName">
 	
-	<bean id="rolesAction" class="org.cfw.web.sys.RolesAction"/>
-	<bean id="accountsAction" class="org.cfw.web.sys.AccountsAction"/>
+	<bean id="rolesAction" class="org.cfw.web.sys.RolesAction" scope="prototype"/>
+	<bean id="accountsAction" class="org.cfw.web.sys.AccountsAction" scope="prototype"/>
 </beans>
