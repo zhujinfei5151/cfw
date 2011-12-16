@@ -29,6 +29,10 @@ public class AccountServiceImpl implements AccountService {
         return sysAccountMapper.updateByPrimaryKeySelective(record);
     }
 
+    public int deleteSysAccountByAccount(String account) {
+        return sysAccountMapper.deleteByPrimaryKey(account);
+    }
+
     public void setSysAccountMapper(SysAccountMapper sysAccountMapper) {
         this.sysAccountMapper = sysAccountMapper;
     }
