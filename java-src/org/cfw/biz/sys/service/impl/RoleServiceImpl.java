@@ -116,6 +116,10 @@ public class RoleServiceImpl implements RoleService {
         return (short) sysRoleMapper.selectSeqSysRoleID();
     }
 
+    public List<SysRole> query() {
+        return sysRoleMapper.selectByExample(null);
+    }
+
     public void setSysRoleMapper(SysRoleMapper sysRoleMapper) {
         this.sysRoleMapper = sysRoleMapper;
     }
