@@ -37,6 +37,11 @@ public class RolesAction extends BaseAction {
         return SUCCESS;
     }
 
+    public String queryAllRole() {
+        roleList = roleService.query();
+        return SUCCESS;
+    }
+
     public String menu() throws Exception {
         WebUserVO user = getCurrentUser();
         if (isAdmin()) {// 超级管理员不过滤功能模块
