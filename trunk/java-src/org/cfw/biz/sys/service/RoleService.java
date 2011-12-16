@@ -12,6 +12,8 @@ public interface RoleService {
 
     List<MenuVO> menu(Short roleid) throws Exception;
 
+    List<SysRole> query();
+
     void insertRole(SysRole sysRole);
 
     void updateRole(SysRole sysRole);
