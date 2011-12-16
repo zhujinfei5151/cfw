@@ -70,7 +70,6 @@ function addAccount(){
 }
 
 function modifyAccount(){
-	var store = accountgrid.getStore();
 	var records =accountgrid.getSelectionModel().getSelection();
 	if(Ext.isEmpty(records) || records.length == 0){
 		Ext.Msg.show({
