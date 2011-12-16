@@ -11,6 +11,8 @@ public interface AccountService {
     int insert(SysAccount sysAccount);
 
     SysAccount selectSysAccountByAccount(String account);
-    
+
     int updateSysAccountByPrimaryKeySelective(SysAccount sysAccount);
+
+    int deleteSysAccountByAccount(String account);
 }
