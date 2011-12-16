@@ -14,7 +14,7 @@
       http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
 	default-autowire="byName">
 	
-	<bean id="loginAction" class="org.cfw.web.index.LoginAction"/>
-	<bean id="homeAction" class="org.cfw.web.index.HomeAction"/>
-	<bean id="imageCodeAction" class="org.cfw.web.index.ImageAction"/>
+	<bean id="loginAction" class="org.cfw.web.index.LoginAction" scope="prototype"/>
+	<bean id="homeAction" class="org.cfw.web.index.HomeAction" scope="prototype"/>
+	<bean id="imageCodeAction" class="org.cfw.web.index.ImageAction" scope="prototype"/>
 </beans>
