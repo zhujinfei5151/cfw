@@ -28,13 +28,13 @@ public class AccountsAction extends BaseAction {
     }
 
     public String query() {
-        String loginAccount = "admin";
-        accountList = accountService.query(loginAccount);
+        String currentAccount = getCurrentAccount();
+        accountList = accountService.query(currentAccount);
         return SUCCESS;
     }
 
     public String add() {
-        String loginAccount = "admin";
+        String currentAccount = getCurrentAccount();
         String account = this.getRequest().getParameter("account");
         String name = this.getRequest().getParameter("name");
         String sex = this.getRequest().getParameter("sex");
@@ -42,6 +42,12 @@ public class AccountsAction extends BaseAction {
         String position = this.getRequest().getParameter("position");
         String note = this.getRequest().getParameter("note");
 
+        SysAccount oldsysAccount = accountService.selectSysAccountByAccount(account);
+        if (oldsysAccount != null) {
+            this.success = false;
+            this.errorMsg = "用户账号重复";
+            return SUCCESS;
+        }
         SysAccount sysAccount = new SysAccount();
         sysAccount.setAccount(account);
         sysAccount.setName(name);
@@ -49,7 +55,7 @@ public class AccountsAction extends BaseAction {
         sysAccount.setRoleid((short) Integer.parseInt(roleid));
         sysAccount.setSex((short) Integer.parseInt(sex));
         sysAccount.setPosition(position);
-        sysAccount.setCreateaccount(loginAccount);
+        sysAccount.setCreateaccount(currentAccount);
         sysAccount.setCreatetime(new Date());
         sysAccount.setNote(note);
 
@@ -64,6 +70,7 @@ public class AccountsAction extends BaseAction {
     public String modify() {
         String account = this.getRequest().getParameter("account");
         String name = this.getRequest().getParameter("name");
+        String sex = this.getRequest().getParameter("sex");
         String roleid = this.getRequest().getParameter("roleid");
         String position = this.getRequest().getParameter("position");
         String note = this.getRequest().getParameter("note");
@@ -71,17 +78,22 @@ public class AccountsAction extends BaseAction {
         SysAccount sysAccount = accountService.selectSysAccountByAccount(account);
         if (sysAccount == null) {
             this.success = false;
+            this.errorMsg = "用户账号不正确";
             return SUCCESS;
         }
         sysAccount.setName(name);
+        sysAccount.setSex((short) Integer.parseInt(sex));
         sysAccount.setRoleid((short) Integer.parseInt(roleid));
         sysAccount.setPosition(position);
         sysAccount.setNote(note);
 
+        this.success = accountService.updateSysAccountByPrimaryKeySelective(sysAccount) == 1 ? true : false;
         return SUCCESS;
     }
 
     public String delete() {
+        String account = this.getRequest().getParameter("account");
+        this.success = accountService.deleteSysAccountByAccount(account) == 1 ? true : false;
         return SUCCESS;
     }
 
@@ -139,6 +151,10 @@ public class AccountsAction extends BaseAction {
 
     public String getErrorMsg() {
         return errorMsg;
+    }
+
+    public void setErrorMsg(String errorMsg) {
+        this.errorMsg = errorMsg;
     }
 
     public List<SysAccount> getAccountList() {
