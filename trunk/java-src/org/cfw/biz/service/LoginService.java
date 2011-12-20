@@ -10,4 +10,6 @@ public interface LoginService {
     SysAccount selectByAccount(String account);
 
     List<ModulePermitVO> selectSysRoleModuleList(short roleid);
+
+    List<ModulePermitVO> selectGuestModuleList();
 }

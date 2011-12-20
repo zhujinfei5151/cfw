@@ -7,8 +7,12 @@ import org.cfw.biz.service.LoginService;
 import org.cfw.biz.sys.dao.SysAccountMapper;
 import org.cfw.biz.sys.dao.SysRoleModuleMapper;
 import org.cfw.biz.sys.model.SysAccount;
+import org.cfw.biz.sys.model.SysModuledef;
 import org.cfw.biz.sys.model.SysRoleModule;
 import org.cfw.biz.sys.model.SysRoleModuleExample;
+import org.cfw.common.CachedVOUtil;
+import org.cfw.common.Constants;
+import org.cfw.common.enums.ModuleMaskEnum;
 import org.cfw.common.vo.ModulePermitVO;
 
 public class LoginServiceImpl implements LoginService {
@@ -27,6 +31,20 @@ public class LoginServiceImpl implements LoginService {
             vo.setModuleid(roleModule.getModuleid());
             vo.setMask(roleModule.getMask());
             moduleList.add(vo);
+        }
+        return moduleList;
+    }
+
+    public List<ModulePermitVO> selectGuestModuleList() {
+        List<ModulePermitVO> moduleList = new LinkedList<ModulePermitVO>();
+        List<SysModuledef> moduledefList = CachedVOUtil.getModuledefList();
+        for (SysModuledef moduledef : moduledefList) {
+            if (Constants.GUEST_MASK == moduledef.getMask()) {
+                ModulePermitVO vo = new ModulePermitVO();
+                vo.setModuleid(moduledef.getModuleid());
+                vo.setMask(ModuleMaskEnum.READ.getShortValue());
+                moduleList.add(vo);
+            }
         }
         return moduleList;
     }

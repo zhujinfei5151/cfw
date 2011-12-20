@@ -1,11 +1,9 @@
 package org.cfw.web.index;
 
-import java.io.IOException;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-import org.apache.log4j.Logger;
 import org.cfw.biz.service.LoginService;
 import org.cfw.biz.sys.model.SysAccount;
 import org.cfw.common.CachedVOUtil;
@@ -20,25 +18,37 @@ import com.opensymphony.xwork2.ActionContext;
 @SuppressWarnings("serial")
 public class LoginAction extends BaseAction {
 
-    private static Logger logger  = Logger.getLogger(LoginAction.class.getName());
+    private LoginService loginService;
+    private String       username;
+    private String       password;
+    private String       checkcode;
+    private boolean      success = false;
+    private String       msg;
+    private SysAccount   sysAccount;
+    private int          flag;
 
-    private LoginService  loginService;
-    private String        username;
-    private String        password;
-    private String        checkcode;
-    private boolean       success = false;
-    private String        msg;
-    private SysAccount    sysAccount;
-    private int           flag;
-
-    public String init() throws IOException {
+    public String init() throws Exception {
         String currentTheme = (String) getSessionAttribute(Constants.CURRENTTHEME);
         if (StringUtil.isEmpty(currentTheme)) {// 默认主题
             setSessionAttribute(Constants.CURRENTTHEME, "ext-all");
         }
         String loginMode = CachedVOUtil.getSysParam(Constants.LOGIN_MODE);
         if (loginMode == null || loginMode.equals("2")) return "ext.login";
-        else return "ext.index";
+        else {// 匿名登录
+            SysAccount sysAccount = new SysAccount();
+            sysAccount.setAccount(Constants.GUEST);
+            sysAccount.setName("宾客");
+
+            loadPermission(sysAccount);
+            setCurrentUser(sysAccount.getAccount(), sysAccount.getName());
+
+            return "ext.index";
+        }
+    }
+
+    private void setCurrentUser(String currentAccount, String currentName) {
+        setRequestAttribute("currentAccount", currentAccount);
+        setRequestAttribute("currentName", currentName);
     }
 
     public String login() {
@@ -71,8 +81,7 @@ public class LoginAction extends BaseAction {
                         this.msg = "登录成功!";
 
                         // 获取用户权限信息，并保存在session里
-                        WebUserVO user = getPermission(sysAccount);
-                        setSessionAttribute(Constants.CURRENTUSER, user);
+                        loadPermission(sysAccount);
                     } else {
                         this.success = false;
                         this.msg = "密码错误!";
@@ -90,6 +99,7 @@ public class LoginAction extends BaseAction {
             return logout();
         }
         setSessionAttribute(Constants.CURRENTTHEME, "ext-all");
+        setCurrentUser(user.getAccount(), user.getName());
         return SUCCESS;
     }
 
@@ -99,6 +109,7 @@ public class LoginAction extends BaseAction {
             return logout();
         }
         setSessionAttribute(Constants.CURRENTTHEME, "ext-all-gray");
+        setCurrentUser(user.getAccount(), user.getName());
 
         return SUCCESS;
     }
@@ -109,11 +120,12 @@ public class LoginAction extends BaseAction {
             return logout();
         }
         setSessionAttribute(Constants.CURRENTTHEME, "ext-all-access");
+        setCurrentUser(user.getAccount(), user.getName());
 
         return SUCCESS;
     }
 
-    private WebUserVO getPermission(SysAccount sysAccount) {
+    private void loadPermission(SysAccount sysAccount) {
         WebUserVO user = new WebUserVO();
         user.setAccount(sysAccount.getAccount());
         user.setName(sysAccount.getName());
@@ -123,11 +135,16 @@ public class LoginAction extends BaseAction {
 
         PermissionVO permission = new PermissionVO();
         if (!Constants.ADMIN.equals(user.getAccount())) { // 超级管理员除外
-            // 加载模块权限
-            permission.setModuleList(loginService.selectSysRoleModuleList(user.getRoleId()));
+            if (Constants.GUEST.equals(user.getAccount())) {// 加载guest功能权限
+                permission.setModuleList(loginService.selectGuestModuleList());
+            } else {
+                // 加载模块权限
+                permission.setModuleList(loginService.selectSysRoleModuleList(user.getRoleId()));
+            }
         }
         user.setPermission(permission);
-        return user;
+
+        setSessionAttribute(Constants.CURRENTUSER, user);
     }
 
     public String logout() throws Exception {
