@@ -26,6 +26,9 @@ function init() {
 	});
 	
 	var modifyAccountBtn = Ext.getCmp('modifyAccountBtn');
+	if(currentAccount == 'guest') {
+		modifyAccountBtn.hide();
+	}
 	modifyAccountBtn.on('click', onModifyAccount);
 	var themeCombo = Ext.getCmp("themeCombo");
 	themeCombo.on('change',onThemeComboChange);

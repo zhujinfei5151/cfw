@@ -22,7 +22,7 @@ Ext.define('cfw.view.ui.Viewport', {
 						width : 10
 					}, {
 						xtype : 'label',
-						text : '用户名:admin'
+						text : '用户名:' + currentAccount + '(' + currentName + ')' 
 					}, {
 						xtype : 'tbseparator'
 					}, {
