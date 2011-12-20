@@ -16,6 +16,8 @@
 <title>通用信息系统框架</title>
 <script type="text/javascript">
 	var currentTheme = '<s:property value="#attr.currentTheme" />';
+	var currentAccount = '<s:property value="#attr.currentAccount" />';
+	var currentName = '<s:property value="#attr.currentName"  escape="false"/>';
 </script>
 </head>
 <body>

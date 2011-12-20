@@ -113,6 +113,10 @@
             var map;
             var untiled;
             var tiled;
+            
+
+            var untiled1;
+            var tiled1;
             var pureCoverage = false;
             // pink tile avoidance
             OpenLayers.IMAGE_RELOAD_ATTEMPTS = 5;
@@ -134,8 +138,8 @@
                 }
             
                 var bounds = new OpenLayers.Bounds(
-                    73.447, 6.319,
-                    135.086, 53.558
+                    118.34, 29.191,
+                    120.873, 30.591
                 );
                 var options = {
                     controls: [],
@@ -146,12 +150,11 @@
                 };
                 map = new OpenLayers.Map('map', options);
             
-                // setup tiled layer
                 tiled = new OpenLayers.Layer.WMS(
-                    "china:bou1_4p - Tiled", "http://172.16.20.75:8180/geoserver/wms",
+                    "hangzhou:Adm_Area_region - Tiled", "http://172.16.20.75:8180/geoserver/hangzhou/wms",
                     {
-                        LAYERS: 'china:bou1_4p',
-                        STYLES: 'polygon',
+                        LAYERS: 'hangzhou:Adm_Area_region',
+                        STYLES: '',
                         format: format,
                         tiled: !pureCoverage,
                         tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
@@ -165,16 +168,44 @@
             
                 // setup single tiled layer
                 untiled = new OpenLayers.Layer.WMS(
-                    "china:bou1_4l - Untiled", "http://172.16.20.75:8180/geoserver/wms",
+                    "hangzhou:Adm_Area_region - Untiled", "http://172.16.20.75:8180/geoserver/hangzhou/wms",
                     {
-                        LAYERS: 'china:bou1_4l',
-                        STYLES: 'polygon',
+                        LAYERS: 'hangzhou:Adm_Area_region',
+                        STYLES: '',
                         format: format
                     },
                     {singleTile: true, ratio: 1, isBaseLayer: true} 
                 );
         
-                map.addLayers([untiled, tiled]);
+                
+                tiled1 = new OpenLayers.Layer.WMS(
+                    "hangzhou:Dchina_region - Tiled", "http://172.16.20.75:8180/geoserver/hangzhou/wms",
+                    {
+                        LAYERS: 'hangzhou:Dchina_region',
+                        STYLES: '',
+                        format: format,
+                        tiled: !pureCoverage,
+                        tilesOrigin : map.maxExtent.left + ',' + map.maxExtent.bottom
+                    },
+                    {
+                        buffer: 0,
+                        displayOutsideMaxExtent: true,
+                        isBaseLayer: true
+                    } 
+                );
+            
+                // setup single tiled layer
+                untiled1 = new OpenLayers.Layer.WMS(
+                    "hangzhou:Dchina_region - Untiled", "http://172.16.20.75:8180/geoserver/hangzhou/wms",
+                    {
+                        LAYERS: 'hangzhou:Dchina_region',
+                        STYLES: '',
+                        format: format
+                    },
+                    {singleTile: true, ratio: 1, isBaseLayer: true} 
+                );
+        
+                map.addLayers([tiled1, tiled]);
 
                 // build up all controls
                 map.addControl(new OpenLayers.Control.PanZoomBar({
