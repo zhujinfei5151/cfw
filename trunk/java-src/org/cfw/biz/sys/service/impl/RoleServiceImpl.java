@@ -12,6 +12,7 @@ import org.cfw.biz.sys.model.SysRoleModule;
 import org.cfw.biz.sys.model.SysRoleModuleExample;
 import org.cfw.biz.sys.service.RoleService;
 import org.cfw.common.CachedVOUtil;
+import org.cfw.common.enums.ModuleMaskEnum;
 import org.cfw.common.vo.MenuVO;
 
 public class RoleServiceImpl implements RoleService {
@@ -81,7 +82,11 @@ public class RoleServiceImpl implements RoleService {
                 menuVO.setIconCls(moduledef.getIcon());
                 menuVO.setModuleid(moduledef.getModuleid());
                 menuVO.setUrl(moduledef.getUrl());
-                menuVO.setMask(moduledef.getMask());
+                if (roleid == null) {// 超级管理员
+                    menuVO.setMask(ModuleMaskEnum.CONTROL.getShortValue());// 赋控制权限
+                } else {
+                    menuVO.setMask(moduledef.getMask());
+                }
                 menuVO.setChildren(selectChildren(menuVO, moduledefList));
                 menuList.add(menuVO);
             }
