@@ -84,17 +84,18 @@ public class RoleServiceImpl implements RoleService {
                 menuVO.setUrl(moduledef.getUrl());
                 if (roleid == null) {// 超级管理员
                     menuVO.setMask(ModuleMaskEnum.CONTROL.getShortValue());// 赋控制权限
+                    menuVO.setChildren(selectChildren(menuVO, moduledefList, true));
                 } else {
                     menuVO.setMask(moduledef.getMask());
+                    menuVO.setChildren(selectChildren(menuVO, moduledefList, false));
                 }
-                menuVO.setChildren(selectChildren(menuVO, moduledefList));
                 menuList.add(menuVO);
             }
         }
         return menuList;
     }
 
-    public List<MenuVO> selectChildren(MenuVO menu, List<SysModuledef> moduleDefList) {
+    public List<MenuVO> selectChildren(MenuVO menu, List<SysModuledef> moduleDefList, boolean isAdmin) {
         MenuVO menuVO;
         boolean leaf = true;
         List<MenuVO> menuList = new ArrayList<MenuVO>(0);
@@ -107,8 +108,13 @@ public class RoleServiceImpl implements RoleService {
                     menuVO.setIconCls(moduleDef.getIcon());
                     menuVO.setModuleid(moduleDef.getModuleid());
                     menuVO.setUrl(moduleDef.getUrl());
-                    menuVO.setMask(moduleDef.getMask());
-                    menuVO.setChildren(selectChildren(menuVO, moduleDefList));
+                    if (isAdmin) {// 超级管理员
+                        menuVO.setMask(ModuleMaskEnum.CONTROL.getShortValue());// 赋控制权限
+                        menuVO.setChildren(selectChildren(menuVO, moduleDefList, true));
+                    } else {
+                        menuVO.setMask(moduleDef.getMask());
+                        menuVO.setChildren(selectChildren(menuVO, moduleDefList, false));
+                    }
                     menuList.add(menuVO);
                 }
             }
