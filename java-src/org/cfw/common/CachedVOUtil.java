@@ -40,9 +40,9 @@ public class CachedVOUtil {
             paramMap = new HashMap<String, String>();
             Properties p = new Properties();
             URL url = PropertiesUtil.class.getClassLoader().getResource("");
-            name = url.toString().substring(6, (url.toString().indexOf("classes")));
-            name += "conf/sysparams.properties";
-            p = PropertiesUtil.loadProperties(name, PropertiesUtil.BY_PROPERTYRESOURCEBUNDLE);
+            String filepath = url.toString().substring(6, (url.toString().indexOf("classes")));
+            filepath += "conf/sysparams.properties";
+            p = PropertiesUtil.loadProperties(filepath, PropertiesUtil.BY_PROPERTYRESOURCEBUNDLE);
             Enumeration<?> keys = p.propertyNames();
             while (keys.hasMoreElements()) {
                 String key = (String) keys.nextElement();
@@ -50,8 +50,8 @@ public class CachedVOUtil {
             }
             cache.put(SYS_PARAMS, paramMap);
         }
-
-        return (String) paramMap.get(name);
+        String value = paramMap.get(name);
+        return value;
     }
 
     public void setSysModuledefMapper(SysModuledefMapper sysModuledefMapper) {
