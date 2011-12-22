@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Application xmlns:fx="http://ns.adobe.com/mxml/2009" 
+				xmlns:mx="library://ns.adobe.com/flex/mx"
+				xmlns:maps="org.cfw.maps.*" layout="vertical" minWidth="955" minHeight="600" paddingTop="0" paddingRight="0" paddingLeft="0" paddingBottom="0" verticalGap="1"
+				creationComplete="init()" layout.login="absolute">
+	<mx:states>
+		<mx:State name="State1"/>
+		<mx:State name="login"/>
+	</mx:states>
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<maps:CfwEventMap />
+	</fx:Declarations>
+	<fx:Style source="assets/css/cfw.css"/>
+	<fx:Script>
+		<![CDATA[
+			import mx.collections.ArrayCollection;
+			import mx.events.MenuEvent;
+			import mx.messaging.Channel;
+			import mx.messaging.ChannelSet;
+			import mx.messaging.config.ServerConfig;
+			import mx.rpc.events.ResultEvent;
+			
+			import org.cfw.common.ApplicationContext;
+			import org.cfw.events.MainPageEvent;
+			[Bindable]
+			public var menus:ArrayCollection;
+			
+			private function init():void {
+				this.currentState = "";
+				
+				loadMenu();
+			}
+			
+			private function loadMenu():void {
+				var event:MainPageEvent = new MainPageEvent(MainPageEvent.LOADMENU);
+				dispatchEvent(event);
+			}
+			
+			private function showHomePage():void {
+			}
+			
+			private function help():void {
+				trace("invoke help....");
+			}
+			
+			private function onMenuClick(event:MenuEvent):void {
+				var menu:Object = event.item;
+				ApplicationContext.currentMenuID = menu.moduleid;
+				
+				var mainPageEvent:MainPageEvent = new MainPageEvent(MainPageEvent.MENUCLICK);
+				mainPageEvent.url = menu.url;
+				mainPageEvent.moduleLoader = mainModuleLoader;
+				dispatchEvent(mainPageEvent);
+			}
+		]]>
+	</fx:Script>
+	<mx:VBox width="100%" height="90" verticalGap="0" includeIn="State1">
+		<mx:HBox width="100%" height="100%" horizontalGap="0">
+			<mx:Canvas width="100%" height="100%">
+			</mx:Canvas>
+			<mx:VBox width="250" height="100%" verticalGap="0" horizontalAlign="center" verticalAlign="middle">
+				<mx:HBox width="100%" height="30" horizontalAlign="center" verticalAlign="middle">
+					<mx:Button label="首页" click="showHomePage()"/>
+					<mx:Button label="帮助" click="help()"/>
+					<mx:Button label="注销"/>
+				</mx:HBox>
+				<mx:Image width="100%" height="100%"/>
+			</mx:VBox>
+		</mx:HBox>
+		<mx:HBox width="100%" height="100%" horizontalGap="0">
+			<mx:Spacer width="100%" /><mx:MenuBar dataProvider="{menus}" labelField="text" itemClick="onMenuClick(event)"/>
+		</mx:HBox>
+	</mx:VBox>
+	<mx:ModuleLoader id="mainModuleLoader" width="100%" height="100%" includeIn="State1">
+	</mx:ModuleLoader>
+	<mx:HBox width="100%" height="30" includeIn="State1">
+		<mx:Spacer width="5" height="100%"/>
+		<mx:Label text="用户名:admin"/>
+	</mx:HBox>
+	<mx:TitleWindow includeIn="login" width="350" height="210" layout="absolute" verticalCenter="6" horizontalCenter="0" title="用户登录">
+		<mx:Form left="5" right="5" bottom="55" top="5">
+			<mx:FormItem label="帐号:" width="100%">
+				<mx:TextInput width="120"/>
+			</mx:FormItem>
+			<mx:FormItem label="密码:" width="100%">
+				<mx:TextInput width="120"/>
+			</mx:FormItem>
+			<mx:FormItem label="验证码:" width="100%">
+				<mx:TextInput width="120"/>
+			</mx:FormItem>
+		</mx:Form>
+		<mx:Button x="129" y="126" label="登录"/>
+		<mx:Button x="211" y="126" label="重置"/>
+		<mx:HBox width="100%" height="25" bottom="0" left="0">
+		</mx:HBox>
+	</mx:TitleWindow>
+	
+</mx:Application>

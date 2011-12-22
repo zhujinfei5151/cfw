@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalEventMap xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns="http://mate.asfusion.com/" xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			
+			import org.cfw.business.TabManager;
+			import org.cfw.common.ApplicationContext;
+			import org.cfw.events.TabEvent;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<Debugger level="{Debugger.ALL}"/>
+		<EventHandlers type="{TabEvent.LOADTAB}">
+			<RemoteObjectInvoker destination="homeService" method="constructTabs" source="homeService" 
+								 arguments="{[ApplicationContext.currentMenuID,null]}">
+				<resultHandlers>
+					<MethodInvoker generator="{TabManager}" method="loadTabData" arguments="{resultObject}"/>
+				</resultHandlers>
+			</RemoteObjectInvoker>
+		</EventHandlers>
+		<EventHandlers type="{TabEvent.TABCLICK}">
+			<MethodInvoker generator="{TabManager}" method="onTabClick" arguments="{event}"/>
+		</EventHandlers>
+		<Injectors target="{tab}">
+			<PropertyInjector targetKey="tabs" source="{TabManager}" sourceKey="tabs" />
+		</Injectors>
+	</fx:Declarations>
+</LocalEventMap>
