@@ -4,10 +4,13 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-public class SysAccountExample {
-    protected String orderByClause;
+import org.cfw.common.vo.BaseExample;
 
-    protected boolean distinct;
+public class SysAccountExample extends BaseExample {
+
+    protected String         orderByClause;
+
+    protected boolean        distinct;
 
     protected List<Criteria> oredCriteria;
 
@@ -844,11 +847,12 @@ public class SysAccountExample {
     }
 
     public static class Criterion {
-        private String condition;
 
-        private Object value;
+        private String  condition;
 
-        private Object secondValue;
+        private Object  value;
+
+        private Object  secondValue;
 
         private boolean noValue;
 
@@ -858,7 +862,7 @@ public class SysAccountExample {
 
         private boolean listValue;
 
-        private String typeHandler;
+        private String  typeHandler;
 
         public String getCondition() {
             return condition;
