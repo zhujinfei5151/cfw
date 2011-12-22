@@ -15,6 +15,8 @@
     <result column="EMAIL" property="email" jdbcType="VARCHAR" />
     <result column="NOTE" property="note" jdbcType="VARCHAR" />
   </resultMap>
+  <resultMap id="SysAccountResultDTO" type="org.cfw.biz.sys.model.SysAccountDTO" extends="BaseResultMap">
+  </resultMap>
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -313,4 +315,20 @@
       EMAIL = #{email,jdbcType=VARCHAR}
     where ACCOUNT = #{account,jdbcType=VARCHAR}
   </update>
+  <select id="selectByPage" parameterType="org.cfw.biz.sys.model.SysAccountExample"  resultMap="SysAccountResultDTO">
+  	SELECT * FROM (SELECT B.*, ROWNUM RN FROM (
+		select A.ACCOUNT, 
+		A.NAME, 
+		A.PASSWORD, 
+		A.ROLEID, A.SEX, A.TELEPHONE, A.POSITION,
+		A.CREATETIME, A.CREATEACCOUNT, A.HOMEPAGE,A.EMAIL,A.NOTE
+		from CFW.SYS_ACCOUNT A
+		<if test="_parameter != null" >
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null" >
+	      order by ${orderByClause}
+	    </if>
+		<![CDATA[) B WHERE ROWNUM <= #{endRow}) WHERE RN > #{startRow}]]>
+	</select>
 </mapper>
