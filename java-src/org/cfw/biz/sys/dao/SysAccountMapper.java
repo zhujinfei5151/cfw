@@ -29,4 +29,7 @@ public interface SysAccountMapper {
     int updateByPrimaryKeySelective(SysAccount record);
 
     int updateByPrimaryKey(SysAccount record);
+
+    List<SysAccount> selectByPage(SysAccountExample example);
+
 }
