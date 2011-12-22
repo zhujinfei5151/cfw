@@ -37,17 +37,21 @@ function init() {
 	modifyButton.on('click',modifyRole);
 	removeButton.on('click',removeRole);
 	
-	var root = menustore.getRootNode();
-	var children = root.childNodes;
-	Ext.Array.forEach(children,function(itemnode){
-		if(!itemnode.data.leaf){
-			getMaxFromChildren(itemnode);
-		}
-	});
+	menustore.on('load',loadmenustore);
 	
 	var plugin = modulegrid.getPlugin();
 	plugin.on('edit',onEdit);
 	initRole();
+}
+
+function loadmenustore(store,node,recordst,success,options){
+	if(success && recordst.length > 0){
+		Ext.Array.forEach(recordst,function(itemnode){
+			if(!itemnode.data.leaf){
+				getMaxFromChildren(itemnode);
+			}
+		});
+	}
 }
 
 function roleSelectionChange(model,selected,options){
