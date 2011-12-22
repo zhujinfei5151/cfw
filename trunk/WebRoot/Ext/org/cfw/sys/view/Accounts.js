@@ -8,11 +8,11 @@ Ext.define('cfw.sys.view.ui.AccountsViewport', {
 			region : 'center',
 			layout : 'fit',
 			columns : [ {
-				text : "用户名",
+				text : "用户帐号",
 				dataIndex : 'account',
 				sortable : true
 			}, {
-				text : "用户姓名",
+				text : "用户名称",
 				dataIndex : 'name',
 				sortable : true
 			}, {
