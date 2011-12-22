@@ -10,6 +10,9 @@
         <action name="accounts_init" class="accountsAction" method="init">
 			<result name="success">/Ext/org/cfw/sys/Accounts.jsp</result>
         </action>
+        <action name="accountQuery_init" class="accountQueryAction" method="init">
+        	<result name="success">/Ext/org/cfw/sys/AccountQuery.jsp</result>
+        </action>
 	</package>
 	
 	<package name="jsonSys" namespace="/sys" extends="json-base">
@@ -37,6 +40,11 @@
         <action name="accounts_query" class="accountsAction" method="query">
         	<result type="json">
         		<param name="root">accountList</param>
+        	</result>
+        </action>
+        <action name="accountQuery_query" class="accountQueryAction" method="query">
+        	<result type="json">
+        		<param name="root">accountpage</param>
         	</result>
         </action>	
 	</package>
