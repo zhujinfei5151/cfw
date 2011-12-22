@@ -1,5 +1,7 @@
 package org.cfw.web.common;
 
+import java.io.UnsupportedEncodingException;
+
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -7,6 +9,7 @@ import javax.servlet.http.HttpSession;
 
 import org.apache.struts2.ServletActionContext;
 import org.cfw.common.Constants;
+import org.cfw.common.util.StringUtil;
 import org.cfw.common.vo.WebUserVO;
 
 import com.opensymphony.xwork2.ActionSupport;
@@ -41,6 +44,11 @@ public class BaseAction extends ActionSupport {
 
     public HttpSession getSession() {
         return this.getRequest().getSession();
+    }
+
+    public String unescape(String src) throws UnsupportedEncodingException {
+        if (StringUtil.isEmpty(src)) return "";
+        return new String(src.getBytes("ISO-8859-1"), "UTF-8");
     }
 
     public void setSessionAttribute(String key, Object value) {
