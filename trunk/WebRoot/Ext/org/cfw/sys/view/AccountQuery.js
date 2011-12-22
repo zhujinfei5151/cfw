@@ -23,7 +23,7 @@ Ext.define('cfw.sys.view.ui.AccountQueryViewport',{
 				name : 'name',
 				id : 'name',
 				emptyText : "所有"
-			},"->",{
+			},"",{
 				text : '查询',
 				xtype : 'button',
 				name : 'queryButton',
@@ -59,6 +59,12 @@ Ext.define('cfw.sys.view.ui.AccountQueryViewport',{
 		           displayInfo: true,
 		           displayMsg : '第 {0} - {1} 条 共 {2} 条',
 		           emptyMsg : "没有记录",
+		           beforePageText : '第',
+		           afterPageText : '页  共 {0} 页',
+		           firstText : '第一页',
+		           lastText : '最后一页',
+		           prevText : '上一页',
+		           nextText : '下一页',
 		           pageSize : limit,
 		           listeners : {
 						change : function(paging,pageData) {
