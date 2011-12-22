@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<EventMap xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns="http://mate.asfusion.com/" xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import org.cfw.business.MainPageManager;
+			
+			import org.cfw.events.MainPageEvent;
+			
+			import mx.core.Application;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<Debugger level="{Debugger.ALL}"/>
+		<EventHandlers type="{MainPageEvent.LOADMENU}">
+			<RemoteObjectInvoker destination="homeService" method="constructMenu" source="homeService" arguments="{null}">
+				<resultHandlers>
+					<MethodInvoker generator="{org.cfw.business.MainPageManager}" method="loadMenuData" arguments="{resultObject}"/>
+				</resultHandlers>
+			</RemoteObjectInvoker>
+		</EventHandlers>
+		<EventHandlers type="{MainPageEvent.MENUCLICK}">
+			<MethodInvoker generator="{MainPageManager}" method="onMenuClick" arguments="{event}"/>
+		</EventHandlers>
+		<Injectors target="{index}">
+			<PropertyInjector targetKey="menus" source="{MainPageManager}" sourceKey="menus" />
+		</Injectors>
+	</fx:Declarations>
+</EventMap>

@@ -1,0 +1,6 @@
+/* CSS file */
+@namespace mx "library://ns.adobe.com/flex/mx";
+
+mx|Application {
+	font-size : 12;
+}

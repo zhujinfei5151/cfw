@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<mx:Module xmlns:fx="http://ns.adobe.com/mxml/2009" 
+		   xmlns:mx="library://ns.adobe.com/flex/mx" layout="absolute" width="100%" height="100%"
+		   creationComplete="init()" xmlns:maps="org.cfw.maps.*">
+	<fx:Declarations>
+		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<maps:TabEventMap dispatcher="{this}" />
+	</fx:Declarations>
+	<fx:Script>
+		<![CDATA[
+			import flashx.textLayout.elements.TabElement;
+			
+			import mx.collections.ArrayCollection;
+			import mx.events.ItemClickEvent;
+			
+			import org.cfw.events.TabEvent;
+			[Bindable]
+			public var tabs:ArrayCollection;
+			
+			private function init():void {
+				//加载tab信息
+				var tabEvent:TabEvent = new TabEvent(TabEvent.LOADTAB);
+				
+				dispatchEvent(tabEvent);
+				
+			}
+			private function onTabClick(event:ItemClickEvent):void {
+				var menu:Object = event.item;
+				
+				var tabEvent:TabEvent = new TabEvent(TabEvent.TABCLICK);
+				tabEvent.url = menu.url;
+				tabEvent.moduleLoader = tabModuleLoader;
+				dispatchEvent(tabEvent);
+			}
+		]]>
+	</fx:Script>
+	<mx:TabBar left="5" top="0" dataProvider="{tabs}" labelField="text" itemClick="onTabClick(event)"/>
+	<mx:ModuleLoader id="tabModuleLoader" width="100%" height="100%" top="25">
+	</mx:ModuleLoader>
+</mx:Module>
