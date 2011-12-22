@@ -59,8 +59,8 @@ function roleSelectionChange(model,selected,options){
 		initRole();
 		return;
 	}
-	if(selected.length != 1) return;
-	moduleform.loadRecord(selected[0]);
+//	if(selected.length != 1) return;
+	moduleform.loadRecord(selected[selected.length - 1]);
 	roleModuleList = selected[0].data.roleModuleList;
 	if(records.length == 0){
 		records = nodeRecords(menustore.getRootNode());
