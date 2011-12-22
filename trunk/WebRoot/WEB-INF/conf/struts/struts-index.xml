@@ -7,6 +7,7 @@
         <action name="init" class="loginAction" method="init">
             <result name="ext.index">/Ext/index.jsp</result>
             <result name="ext.login">/Ext/login.jsp</result>
+            <result name="flex.index">/Flex/index.jsp</result>
         </action>
         <action name="logout" class="loginAction" method="logout">
 			<result name="login">/Ext/login.jsp</result>

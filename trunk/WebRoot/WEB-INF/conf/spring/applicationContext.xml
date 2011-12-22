@@ -14,7 +14,7 @@
       http://www.springframework.org/schema/flex/spring-flex-1.0.xsd"
 	default-autowire="byName">
 	<context:annotation-config />
-
+	
 	<!-- 导入属性配置文件 --> 
 	<context:property-placeholder location="/WEB-INF/conf/jdbc.properties" />
 	<!-- 数据库的配置 ,dbcp连接池 -->
