@@ -6,6 +6,8 @@ import org.cfw.biz.sys.dao.SysAccountMapper;
 import org.cfw.biz.sys.model.SysAccount;
 import org.cfw.biz.sys.model.SysAccountExample;
 import org.cfw.biz.sys.service.AccountService;
+import org.cfw.common.util.StringUtil;
+import org.cfw.common.vo.Page;
 
 public class AccountServiceImpl implements AccountService {
 
@@ -31,6 +33,33 @@ public class AccountServiceImpl implements AccountService {
 
     public int deleteSysAccountByAccount(String account) {
         return sysAccountMapper.deleteByPrimaryKey(account);
+    }
+
+    /**
+     * 分页查询用户信息
+     * 
+     * @param account 帐号
+     * @param desc 名称
+     * @param start 起始行
+     * @param limit 截止行
+     * @return
+     */
+    public Page selectByPage(String account, String name, int start, int limit) {
+        SysAccountExample example = new SysAccountExample();
+        SysAccountExample.Criteria criteria = example.createCriteria();
+        if (!StringUtil.isEmpty(account)) {
+            criteria.andAccountLike("%" + account + "%");
+        }
+        if (!StringUtil.isEmpty(name)) {
+            criteria.andNameLike("%" + name + "%");
+        }
+        example.setStartRow(start);
+        example.setEndRow(start + limit);
+
+        Page page = new Page(start, limit);
+        page.setRoot(sysAccountMapper.selectByPage(example));
+        page.setTotalProperty(sysAccountMapper.countByExample(example));
+        return page;
     }
 
     public void setSysAccountMapper(SysAccountMapper sysAccountMapper) {
