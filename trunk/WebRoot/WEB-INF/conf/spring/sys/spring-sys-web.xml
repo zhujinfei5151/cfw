@@ -16,4 +16,5 @@
 	
 	<bean id="rolesAction" class="org.cfw.web.sys.RolesAction" scope="prototype"/>
 	<bean id="accountsAction" class="org.cfw.web.sys.AccountsAction" scope="prototype"/>
+	<bean id="accountQueryAction" class="org.cfw.web.sys.AccountQueryAction" scope="prototype"/>
 </beans>
