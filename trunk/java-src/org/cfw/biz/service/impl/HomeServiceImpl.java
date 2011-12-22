@@ -1,21 +1,28 @@
 package org.cfw.biz.service.impl;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
 import org.cfw.biz.service.HomeService;
 import org.cfw.biz.sys.model.SysModuledef;
 import org.cfw.common.CachedVOUtil;
+import org.cfw.common.Constants;
 import org.cfw.common.vo.MenuVO;
 import org.cfw.common.vo.ModulePermitVO;
 
 public class HomeServiceImpl implements HomeService {
 
-    public List<MenuVO> constructMenu(List<ModulePermitVO> moduleList) {
+    public List<MenuVO> constructMenu(List<ModulePermitVO> moduleList) throws IOException {
+        String clientTech = CachedVOUtil.getSysParam(Constants.CLIENT_TECH);// 客户端使用技术
         List<MenuVO> menuList = constructMainMenu(moduleList);
         for (MenuVO vo : menuList) {
             if (isExistModule(moduleList, vo.getModuleid())) {
-                vo.setMenus(constructSubMenu(vo.getModuleid(), moduleList));
+                if (clientTech.equals("1")) {// Extjs
+                    vo.setMenus(constructSubMenu(vo.getModuleid(), moduleList));
+                } else {// Flex
+                    vo.setChildren(constructSubMenu(vo.getModuleid(), moduleList));
+                }
             }
         }
         return menuList;

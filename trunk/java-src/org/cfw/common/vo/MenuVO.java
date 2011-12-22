@@ -1,12 +1,11 @@
 package org.cfw.common.vo;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class MenuVO {
 
     private String       text;
-    private List<MenuVO> children = new ArrayList<MenuVO>(0);
+    private List<MenuVO> children;
     private String       iconCls;
     private String       url;
     private String       handler;
