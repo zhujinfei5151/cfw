@@ -28,21 +28,28 @@ public class LoginAction extends BaseAction {
     private int          flag;
 
     public String init() throws Exception {
-        String currentTheme = (String) getSessionAttribute(Constants.CURRENTTHEME);
-        if (StringUtil.isEmpty(currentTheme)) {// 默认主题
-            setSessionAttribute(Constants.CURRENTTHEME, "ext-all");
-        }
         String loginMode = CachedVOUtil.getSysParam(Constants.LOGIN_MODE);
-        if (loginMode == null || loginMode.equals("2")) return "ext.login";
-        else {// 匿名登录
+        String clientTech = CachedVOUtil.getSysParam(Constants.CLIENT_TECH);// 客户端使用技术
+        if (loginMode.equals("1")) {// guest匿名登录
             SysAccount sysAccount = new SysAccount();
             sysAccount.setAccount(Constants.GUEST);
             sysAccount.setName("宾客");
 
             loadPermission(sysAccount);
             setCurrentUser(sysAccount.getAccount(), sysAccount.getName());
-
-            return "ext.index";
+        }
+        if (clientTech.equals("1")) { // 使用Extjs
+            String currentTheme = (String) getSessionAttribute(Constants.CURRENTTHEME);
+            if (StringUtil.isEmpty(currentTheme)) {// 默认主题
+                setSessionAttribute(Constants.CURRENTTHEME, "ext-all");
+            }
+            if (loginMode.equals("1")) {// guest登录
+                return "ext.index";
+            } else {
+                return "ext.login";
+            }
+        } else {// 使用flex技术
+            return "flex.index";
         }
     }
 

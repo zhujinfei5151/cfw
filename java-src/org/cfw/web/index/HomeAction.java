@@ -17,7 +17,7 @@ public class HomeAction extends BaseAction {
     private List<MenuVO> menuList;
     private String       moduleid;
 
-    public String menu() {
+    public String menu() throws Exception {
         WebUserVO user = getCurrentUser();
         menuList = homeService.constructMenu(user.getPermission().getModuleList());
         return SUCCESS;
