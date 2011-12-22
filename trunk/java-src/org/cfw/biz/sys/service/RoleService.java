@@ -29,4 +29,6 @@ public interface RoleService {
     short selectSeqSysRoleID();
 
     List<SysRoleModule> selectSysRoleModuleList(short roleid);
+
+    SysRole selectSysRoleByPrimaryKey(short roleid);
 }
