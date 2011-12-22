@@ -49,10 +49,38 @@ Ext.define('cfw.sys.view.ui.RolesViewport', {//该路径与control里的new有�
 							store : [[0,'禁用']],
 							listeners : {
 								'beforequery' : function(queryEvent,options){
-									var maxmask = Ext.getCmp('modulegrid').getSelectionModel().selected.items[0].data.maxmask;
+									var node = Ext.getCmp('modulegrid').getSelectionModel().selected.items[0];
+									var mask = node.data.maxmask;
+									var maxmask = 0;
+									var minmask = 3;
+									if(!node.data.leaf){
+										var children = node.childNodes;
+										var flag = false;
+										var itemmaxmask;
+										Ext.Array.each(children,function(itemNode){
+											itemmaxmask = itemNode.data.maxmask;
+											if(itemmaxmask > maxmask){
+												maxmask = itemmaxmask;
+											}
+											if(itemNode.data.mask > 0){
+												flag = true;
+												if(itemmaxmask < minmask){
+													minmask = itemmaxmask;
+												}
+											}
+										});
+										if(flag){
+											mask = minmask;
+										}else{
+											mask = maxmask;
+										}
+										node.data.maxmask = mask;
+									}
+									
+									
 									var tempstore = Ext.clone(this.queryStore);
 									tempstore.filterBy(function(record){
-										if(record.get('value') <= maxmask)return true;
+										if(record.get('value') <= mask)return true;
 										else return false;
 									});
 									var records = tempstore.data;
