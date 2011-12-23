@@ -113,13 +113,17 @@ function onEdit(editor,e,options) {
   }
   if(node.data.leaf){
 	  followerAfterBrother(node);
+  }else{
+	  setNodeMaxMask(node);//修改非叶子节点的最大权限
   }
   var minMask = getMinFromBrother(node);
   var parentNode = node.parentNode;
   while(parentNode.parentNode != null){
 	  parentNode.data.mask = minMask;
+	  setNodeMaxMask(parentNode);//修改非叶子节点的最大权限
 	  parentNode = parentNode.parentNode;
   }
+  
   modulegrid.getView().refresh();
 }
 /**
@@ -182,6 +186,35 @@ function getMaxFromChildren(node){
 	return maxMask;
 }
 
+/*
+ *  修改非叶子节点的最大权限
+ */
+function setNodeMaxMask(node){
+	var minmask = 3;
+    var maxmask = 0;
+    var mask;
+	var children = node.childNodes;
+	var flag = false;
+	var itemmaxmask;
+	Ext.Array.each(children,function(itemNode){
+		itemmaxmask = itemNode.data.maxmask;
+		if(itemmaxmask > maxmask){
+			maxmask = itemmaxmask;
+		}
+		if(itemNode.data.mask > 0){
+			flag = true;
+			if(itemmaxmask < minmask){
+				minmask = itemmaxmask;
+			}
+		}
+	});
+	if(flag){
+		mask = minmask;
+	}else{
+		mask = maxmask;
+	}
+	node.data.maxmask = mask;
+}
 function addRole(){
 	var form = moduleform.getForm();
 	var data = [];
