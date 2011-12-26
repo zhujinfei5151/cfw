@@ -2,15 +2,20 @@ package org.cfw.business
 {
 	import com.adobe.serialization.json.JSONDecoder;
 	
-	import org.cfw.events.MainPageEvent;
-	
 	import flash.events.Event;
+	import flash.net.URLLoader;
+	import flash.net.URLLoaderDataFormat;
+	import flash.net.URLRequest;
+	import flash.utils.ByteArray;
 	
 	import mx.collections.ArrayCollection;
+	import mx.controls.Image;
 	import mx.controls.Menu;
 	import mx.logging.Log;
 	import mx.modules.ModuleLoader;
 	import mx.rpc.events.ResultEvent;
+	
+	import org.cfw.events.MainPageEvent;
 
 	public class MainPageManager
 	{
@@ -19,6 +24,7 @@ package org.cfw.business
 		}
 		[Bindable]
 		public var menus:ArrayCollection;
+		public var image:Image;
 		public function showHomePage(event:MainPageEvent):void {
 			
 		}
@@ -41,6 +47,30 @@ package org.cfw.business
 				moduleLoader.unloadModule();
 				moduleLoader.loadModule(url);
 			}
+		}
+		
+		public function loadImage(event:MainPageEvent):void {
+			this.image = event.image;
+			var loader:URLLoader = new URLLoader();
+			loader.dataFormat = URLLoaderDataFormat.BINARY;
+			configureListeners(loader);
+			
+			var request:URLRequest = new URLRequest(event.url);
+			try {
+				loader.load(request);
+			} catch (error:Error) {
+				trace("Unable to load requested document.");
+			}
+		}
+		
+		private function configureListeners(dispatcher:IEventDispatcher):void {
+			dispatcher.addEventListener(Event.COMPLETE, completeHandler);
+		}
+		
+		private function completeHandler(event:Event):void {
+			var loader:URLLoader = URLLoader(event.target);
+			var imageData:ByteArray = ByteArray(loader.data);
+			image.data = imageData;
 		}
 	}
 }

@@ -28,7 +28,6 @@
 			import mx.rpc.events.ResultEvent;
 			
 			import org.cfw.common.ApplicationContext;
-			import org.cfw.events.LoginEvent;
 			import org.cfw.events.MainPageEvent;
 			[Bindable]
 			public var menus:ArrayCollection;
@@ -43,7 +42,16 @@
 				
 				
 				//checkcode.text = generateCheckCode();
-				getCheckCode.send();
+				//getCheckCode.send();
+				loadImage();
+
+			}
+			
+			private function loadImage():void {
+				var event:MainPageEvent = new MainPageEvent(MainPageEvent.LOADIMAGE);
+				event.image = image;
+				event.url = urlBase + "checkcode_init.action";
+				dispatchEvent(event);
 			}
 			
 			private function loadMenu():void {
@@ -144,7 +152,7 @@
 			<mx:FormItem label="验证码:" width="100%">
 				<mx:HBox>
 					<mx:TextInput width="120" id="checkcodeInput"/>
-					<mx:Image id="image" />
+					<mx:Image id="image" width="73" height="40" />
 					<!--
 					<mx:Label id="checkcode" color="#000000"/>
 					<mx:Label text="看不清楚 换一个！" click="checkcode.text=generateCheckCode()" />
