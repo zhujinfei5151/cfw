@@ -1,6 +1,6 @@
 package org.cfw.common
 {
-	import mx.collections.ArrayList;
+	import mx.collections.ArrayCollection;
 
 	public class PermissionVO
 	{
