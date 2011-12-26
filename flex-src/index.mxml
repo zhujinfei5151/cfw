@@ -9,27 +9,41 @@
 	</mx:states>
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
+		<mx:HTTPService id="getCheckCode" url="{urlBase}checkcode_init.action" method="POST" result="onGetResult(event)" resultFormat="array"/>
 		<maps:CfwEventMap />
 	</fx:Declarations>
 	<fx:Style source="assets/css/cfw.css"/>
 	<fx:Script>
 		<![CDATA[
+			import com.adobe.serialization.json.JSONDecoder;
+			
+			import flash.display.BitmapData;
+			
 			import mx.collections.ArrayCollection;
 			import mx.events.MenuEvent;
+			import mx.graphics.codec.JPEGEncoder;
 			import mx.messaging.Channel;
 			import mx.messaging.ChannelSet;
 			import mx.messaging.config.ServerConfig;
 			import mx.rpc.events.ResultEvent;
 			
 			import org.cfw.common.ApplicationContext;
+			import org.cfw.events.LoginEvent;
 			import org.cfw.events.MainPageEvent;
 			[Bindable]
 			public var menus:ArrayCollection;
+			[Bindable]
+			public var urlBase:String;
 			
 			private function init():void {
-				this.currentState = "";
+				urlBase = this.parameters["urlBase"];
+				this.currentState = "login";
 				
 				loadMenu();
+				
+				
+				//checkcode.text = generateCheckCode();
+				getCheckCode.send();
 			}
 			
 			private function loadMenu():void {
@@ -53,6 +67,47 @@
 				mainPageEvent.moduleLoader = mainModuleLoader;
 				dispatchEvent(mainPageEvent);
 			}
+			
+			private function login():void {
+//				var loginEvent:LoginEvent = new LoginEvent(LoginEvent.ACCOUNTLOGIN);
+//				loginEvent.account = accountInput.text;
+//				loginEvent.password = passwordInput.text;
+//				//loginEvent.checkcode = checkcodeInput.text;
+//				dispatchEvent(loginEvent);
+			}
+			
+			private function reset():void{
+				accountInput.text = "";
+				passwordInput.text = "";
+				checkcodeInput.text = "";
+			}
+			
+			private function onGetResult(event:ResultEvent):void{
+				//var jpegEncoder:JPEGEncoder =  new JPEGEncoder();
+				//var result:BitmapData = event.result as BitmapData;
+				var data:ByteArray = event.result as ByteArray;
+				image.data = data;
+			}
+			
+			//产生验证吗
+			
+			private function generateCheckCode():String{   
+				var num:Number;  
+				var code:String;  
+				var checkCode:String="";  
+				
+				for(var i:int=0;i<5;i++){  
+					num=Math.round(Math.random()*100000);  
+					if(num%2==0){  
+						code=String.fromCharCode(48+(num%10));  
+					}else{  
+						code=String.fromCharCode(65+(num%26));  
+					}  
+					checkCode +=code;
+				}  
+				return checkCode;
+			}  
+
 		]]>
 	</fx:Script>
 	<mx:VBox width="100%" height="90" verticalGap="0" includeIn="State1">
@@ -78,21 +133,29 @@
 		<mx:Spacer width="5" height="100%"/>
 		<mx:Label text="用户名:admin"/>
 	</mx:HBox>
-	<mx:TitleWindow includeIn="login" width="350" height="210" layout="absolute" verticalCenter="6" horizontalCenter="0" title="用户登录">
-		<mx:Form left="5" right="5" bottom="55" top="5">
+	<mx:TitleWindow includeIn="login" width="442" height="217" layout="absolute" verticalCenter="9" horizontalCenter="0" title="用户登录">
+		<mx:Form left="5" right="5" bottom="55" top="5" id="loginForm">
 			<mx:FormItem label="帐号:" width="100%">
-				<mx:TextInput width="120"/>
+				<mx:TextInput width="120" id="accountInput"/>
 			</mx:FormItem>
 			<mx:FormItem label="密码:" width="100%">
-				<mx:TextInput width="120"/>
+				<mx:TextInput width="120" id="passwordInput"/>
 			</mx:FormItem>
 			<mx:FormItem label="验证码:" width="100%">
-				<mx:TextInput width="120"/>
+				<mx:HBox>
+					<mx:TextInput width="120" id="checkcodeInput"/>
+					<mx:Image id="image" />
+					<!--
+					<mx:Label id="checkcode" color="#000000"/>
+					<mx:Label text="看不清楚 换一个！" click="checkcode.text=generateCheckCode()" />
+					-->
+				</mx:HBox>
 			</mx:FormItem>
 		</mx:Form>
-		<mx:Button x="129" y="126" label="登录"/>
-		<mx:Button x="211" y="126" label="重置"/>
+		<mx:Button x="129" y="126" label="登录" click="login()"/>
+		<mx:Button x="211" y="126" label="重置" click="reset()"/>
 		<mx:HBox width="100%" height="25" bottom="0" left="0">
+			<mx:Label text="" width="133" id="errinfoLabel" color="#FF0000"/>
 		</mx:HBox>
 	</mx:TitleWindow>
 	
