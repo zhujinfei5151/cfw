@@ -21,6 +21,9 @@
 		<EventHandlers type="{MainPageEvent.MENUCLICK}">
 			<MethodInvoker generator="{MainPageManager}" method="onMenuClick" arguments="{event}"/>
 		</EventHandlers>
+		<EventHandlers type="{MainPageEvent.LOADIMAGE}">
+			<MethodInvoker generator="{MainPageManager}" method="loadImage" arguments="{event}"/>
+		</EventHandlers>
 		<Injectors target="{index}">
 			<PropertyInjector targetKey="menus" source="{MainPageManager}" sourceKey="menus" />
 		</Injectors>
