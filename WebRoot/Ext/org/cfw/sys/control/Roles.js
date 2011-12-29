@@ -136,6 +136,12 @@ function followerAfterBrother(node){
 	Ext.Array.each(brotherNodes,function(itemNode,indexNode){
 		if(indexNode > index && mask <= itemNode.data.maxmask){
 			itemNode.data.mask = mask;
+			if(!itemNode.data.leaf){
+				var children = nodeRecords(itemNode);
+				Ext.Array.forEach(children,function(childNode){
+					childNode.data.mask = mask;
+				});
+			}
 		}
 	})
 }
