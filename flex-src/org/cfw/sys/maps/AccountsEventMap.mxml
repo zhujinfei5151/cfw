@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LocalEventMap xmlns:fx="http://ns.adobe.com/mxml/2009" xmlns="http://mate.asfusion.com/" xmlns:mx="library://ns.adobe.com/flex/mx">
+	<fx:Script>
+		<![CDATA[
+			import mx.core.Application;
+			
+			import org.cfw.sys.business.AccountsManager;
+			import org.cfw.sys.events.AccountsEvent;
+		]]>
+	</fx:Script>
+	<fx:Declarations>
+		<Debugger level="{Debugger.ALL}"/>
+		<EventHandlers type="{AccountsEvent.QUERYALLACCOUNTS}">
+			<RemoteObjectInvoker destination="homeService" method="constructSubMenu" source="homeService" arguments="{[event.loginAccount,null]}">
+				<resultHandlers>
+					<MethodInvoker generator="{AccountsManager}" method="queryAllAccountsData" arguments="{resultObject}"/>
+				</resultHandlers>
+			</RemoteObjectInvoker>
+		</EventHandlers>
+		<!--target里的值为sys下的accounts.mxml的文件名，
+		targetKey是该mxml文件里的var变量accounts2,source是business里的AccountsManager.as文件名，sourceKey该as文件里的var变量-->
+	</fx:Declarations>
+</LocalEventMap>
