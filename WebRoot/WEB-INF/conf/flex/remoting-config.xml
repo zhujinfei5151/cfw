@@ -17,4 +17,10 @@
             <source>homeService</source>  
         </properties>  
     </destination>
+    <destination id="accountService">  
+        <properties>  
+            <factory>spring</factory>  
+            <source>accountService</source>  
+        </properties>  
+    </destination>
 </service>
