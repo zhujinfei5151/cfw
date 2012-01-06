@@ -38,6 +38,8 @@ function init() {
 		themeCombo.setValue('index_gray.action');
 	} else if(currentTheme == 'ext-all-access') {
 		themeCombo.setValue('index_access.action');
+	} else if(currentTheme == 'ext-all-green') {
+		themeCombo.setValue('index_green.action');
 	} else {
 		themeCombo.setValue('index.action');
 	}
