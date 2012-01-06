@@ -1,0 +1,140 @@
+$theme-name: 'green';
+$base-color: #b2dece;
+
+//panel
+$panel-header-background-gradient: color-stops(#A3D2CC, #164845);
+$panel-border-color: #91ceb9;
+$panel-header-color: white;
+
+$panel-frame-background-color: #d8efe7;
+
+//window
+$window-background-color: #b2dece;
+$window-header-color: white;
+
+//menu
+$menu-item-active-background-color: darken(#f3f3f3, 5);
+$menu-item-active-border-color: #AACCF6;
+
+//datepicker
+$datepicker-header-background-color: #0D5A50;
+$datepicker-border-color: #71B778;
+$datepicker-th-background-color: #C7EDCA;
+$datepicker-selected-item-background-color: #CBEED2;
+$datepicker-item-hover-background-color: transparent;
+
+//progress bar
+$progress-border-color: #8e8e8e;
+$progress-background-color: #f1f1f1;
+$progress-bar-background-color: #00AA48;
+
+//tips
+$tip-base-color: $base-color;
+
+//grid
+$grid-header-over-border-color: darken($base-color, 3);
+
+//toolbar
+$toolbar-background-gradient: color-stops(#e6e6e6, #efefef);
+$toolbar-separator-color: #aca899;
+$toolbar-text-color: #000;
+
+//form
+$fieldset-header-color: #333;
+
+$boundlist-border-color: #B5C8B6;
+
+//acordion
+$accordion-header-background-color: #e5e5e5;
+
+//tabs
+$tab-base-color: #eaeaea;
+$tab-color-active: white;
+
+$tab-background-gradient: color-stops(#22936B, #4F9F84);
+$tab-background-gradient-over: 'tab-over' !default;
+$tab-background-gradient-active: color-stops(#00DF67, #00B500);
+$tab-background-gradient-disabled: 'tab-disabled' !default;
+
+//buttons
+$button-default-base-color: #f8f8f8;
+$button-default-base-color-over: #f3f3f3;
+$button-default-base-color-focus: $button-default-base-color-over;
+$button-default-base-color-pressed: #d6d6d6;
+$button-default-base-color-disabled: adjust-color($base-color, $hue: 0deg, $saturation: -55.556%, $lightness: 12.745%) !default; //F7F7F7
+
+$button-default-border-color: #bbbbbb;
+$button-default-border-color-over: #9d9d9d;
+$button-default-border-color-focus: $button-default-border-color-over;
+$button-default-border-color-pressed: $button-default-border-color-over;
+$button-default-border-color-disabled: adjust-color($button-default-base-color-disabled, $hue: 0deg, $saturation: 0%, $lightness: -8.627%) !default;
+
+$button-default-background-gradient: 'matte';
+$button-default-background-gradient-over: 'matte';
+$button-default-background-gradient-focus: 'matte';
+$button-default-background-gradient-pressed: 'matte-reverse';
+$button-default-background-gradient-disabled: 'matte';
+
+$button-default-background-gradient-color-stops: null;
+$button-default-background-gradient-color-stops-over: null;
+$button-default-background-gradient-color-stops-focus: null;
+$button-default-background-gradient-color-stops-pressed: null;
+$button-default-background-gradient-color-stops-disabled: null;
+
+
+$button-toolbar-base-color: $button-default-base-color;
+
+$button-toolbar-border-color: transparent !default;
+$button-toolbar-border-color-over: $button-default-border-color-over;
+$button-toolbar-border-color-focus: $button-default-border-color-focus;
+$button-toolbar-border-color-pressed: $button-default-border-color-pressed;
+$button-toolbar-border-color-disabled: $button-default-border-color-disabled;
+
+$button-toolbar-background-color: transparent !default;
+$button-toolbar-background-color-over: $button-default-base-color-over;
+$button-toolbar-background-color-focus: $button-default-base-color-focus;
+$button-toolbar-background-color-pressed: $button-default-base-color-pressed;
+$button-toolbar-background-color-disabled: transparent;
+
+$button-toolbar-background-gradient: null;
+$button-toolbar-background-gradient-over: 'matte';
+$button-toolbar-background-gradient-focus: 'matte';
+$button-toolbar-background-gradient-pressed: 'matte-reverse';
+$button-toolbar-background-gradient-disabled: null;
+
+$button-toolbar-background-gradient-color-stops: null;
+$button-toolbar-background-gradient-color-stops-over: null;
+$button-toolbar-background-gradient-color-stops-focus: null;
+$button-toolbar-background-gradient-color-stops-pressed: null;
+$button-toolbar-background-gradient-color-stops-disabled: null;
+
+@import 'compass';
+@import 'ext4/default/all';
+
+
+@include extjs-boundlist;
+@include extjs-button;
+@include extjs-btn-group;
+@include extjs-datepicker;
+@include extjs-colorpicker;
+@include extjs-menu;
+@include extjs-grid;
+@include extjs-form;
+    @include extjs-form-field;
+    @include extjs-form-fieldset;
+    @include extjs-form-checkboxfield;
+    @include extjs-form-checkboxgroup;
+    @include extjs-form-triggerfield;
+    @include extjs-form-htmleditor;
+@include extjs-panel;
+@include extjs-qtip;
+@include extjs-slider;
+@include extjs-progress;
+@include extjs-toolbar;
+@include extjs-window;
+@include extjs-messagebox;
+@include extjs-tabbar;
+@include extjs-tab;
+@include extjs-tree;
+@include extjs-drawcomponent;
+@include extjs-viewport;
