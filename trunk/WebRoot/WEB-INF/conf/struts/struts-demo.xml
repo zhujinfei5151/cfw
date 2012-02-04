@@ -10,6 +10,9 @@
         <action name="opengis" class="mapAction" method="opengis">
 			<result name="success">/Ext/org/cfw/demo/opengis.jsp</result>
         </action>
+        <action name="theme" class="mapAction" method="theme">
+			<result name="success">/Ext/org/cfw/demo/theme.jsp</result>
+        </action>
 	</package>
 	
 	<package name="jsonDemo" namespace="/demo" extends="json-base">	

@@ -46,6 +46,9 @@
 		</action>
 		<action name="index_access" class="loginAction" method="indexAccess">
 			<result name="success">/Ext/index.jsp</result>
+		</action>
+		<action name="index_green" class="loginAction" method="indexGreen">
+			<result name="success">/Ext/index.jsp</result>
 		</action>	 
 	</package>
 	
