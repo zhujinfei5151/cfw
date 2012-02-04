@@ -3,23 +3,13 @@ package org.cfw.common.vo;
 public class BaseExample {
 
     // 起止页
-    private Integer startRow;
-    private Integer endRow;
+    private Page page;
 
-    public Integer getStartRow() {
-        return startRow;
+    public Page getPage() {
+        return page;
     }
 
-    public void setStartRow(Integer startRow) {
-        this.startRow = startRow;
+    public void setPage(Page page) {
+        this.page = page;
     }
-
-    public Integer getEndRow() {
-        return endRow;
-    }
-
-    public void setEndRow(Integer endRow) {
-        this.endRow = endRow;
-    }
-
 }

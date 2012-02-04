@@ -21,7 +21,7 @@ package org.cfw.sys.business
 		public var accounts:ArrayCollection;
 		
 		
-		public function queryAllAccountsData(result:Object):void {
+		public function query(result:Object):void {
 			if(result == null) return;
 			accounts = result as ArrayCollection;
 		}

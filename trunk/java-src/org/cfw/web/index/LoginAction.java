@@ -132,6 +132,17 @@ public class LoginAction extends BaseAction {
         return SUCCESS;
     }
 
+    public String indexGreen() throws Exception {
+        WebUserVO user = getCurrentUser();
+        if (user == null) {
+            return logout();
+        }
+        setSessionAttribute(Constants.CURRENTTHEME, "ext-all-green");
+        setCurrentUser(user.getAccount(), user.getName());
+
+        return SUCCESS;
+    }
+
     private void loadPermission(SysAccount sysAccount) {
         WebUserVO user = new WebUserVO();
         user.setAccount(sysAccount.getAccount());

@@ -12,6 +12,8 @@ public class Page {
 
     private int     endRow;       // 结束行
 
+    private Object  params;       // 查询条件
+
     public Page() {
     }
 
@@ -28,12 +30,12 @@ public class Page {
         this.totalProperty = totalProperty;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public List getRoot() {
         return root;
     }
 
-    @SuppressWarnings("unchecked")
+    @SuppressWarnings("rawtypes")
     public void setRoot(List root) {
         this.root = root;
     }
@@ -52,6 +54,14 @@ public class Page {
 
     public void setEndRow(int endRow) {
         this.endRow = endRow;
+    }
+
+    public Object getParams() {
+        return params;
+    }
+
+    public void setParams(Object params) {
+        this.params = params;
     }
 
 }

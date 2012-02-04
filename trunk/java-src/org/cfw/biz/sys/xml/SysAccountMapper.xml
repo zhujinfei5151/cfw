@@ -316,8 +316,7 @@
     where ACCOUNT = #{account,jdbcType=VARCHAR}
   </update>
   <select id="selectByPage" parameterType="org.cfw.biz.sys.model.SysAccountExample"  resultMap="SysAccountResultDTO">
-  	SELECT * FROM (SELECT B.*, ROWNUM RN FROM (
-		select A.ACCOUNT, 
+  	select A.ACCOUNT, 
 		A.NAME, 
 		A.PASSWORD, 
 		A.ROLEID, A.SEX, A.TELEPHONE, A.POSITION,
@@ -329,6 +328,5 @@
 		<if test="orderByClause != null" >
 	      order by ${orderByClause}
 	    </if>
-		<![CDATA[) B WHERE ROWNUM <= #{endRow}) WHERE RN > #{startRow}]]>
 	</select>
 </mapper>

@@ -36,14 +36,14 @@
 			
 			private function init():void {
 				urlBase = this.parameters["urlBase"];
-				this.currentState = "login";
+				this.currentState = "";
 				
 				loadMenu();
 				
 				
 				//checkcode.text = generateCheckCode();
 				//getCheckCode.send();
-				loadImage();
+				//loadImage();
 
 			}
 			

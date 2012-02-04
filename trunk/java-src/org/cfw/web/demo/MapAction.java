@@ -13,4 +13,8 @@ public class MapAction extends BaseAction {
         return SUCCESS;
     }
 
+    public String theme() {
+        return SUCCESS;
+    }
+
 }
