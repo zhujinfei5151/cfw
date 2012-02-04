@@ -53,10 +53,9 @@ public class AccountServiceImpl implements AccountService {
         if (!StringUtil.isEmpty(name)) {
             criteria.andNameLike("%" + name + "%");
         }
-        example.setStartRow(start);
-        example.setEndRow(start + limit);
-
         Page page = new Page(start, limit);
+        example.setPage(page);
+
         page.setRoot(sysAccountMapper.selectByPage(example));
         page.setTotalProperty(sysAccountMapper.countByExample(example));
         return page;

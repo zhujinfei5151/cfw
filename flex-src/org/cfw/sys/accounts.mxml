@@ -4,7 +4,7 @@
 		   layout="absolute" width="687" height="467" creationComplete="init()" xmlns:maps="org.cfw.sys.maps.*">
 	<fx:Declarations>
 		<!-- 将非可视元素（例如服务、值对象）放在此处 -->
-		<maps:AccountsEventMap />
+		<maps:AccountsEventMap  dispatcher="{this}" />
 	</fx:Declarations>
 	<fx:Script>
 		<![CDATA[
@@ -17,9 +17,7 @@
 		public var accounts2:ArrayCollection;//col1要处理
 			
 		private function init():void{
-			//trace("good boy!");
-			this.currentState = "";
-			loadAccounts();
+			//loadAccounts();
 		}
 			
 		private function loadAccounts():void{
@@ -55,7 +53,7 @@
 	<mx:TextInput x="317" y="284"/>
 	<mx:TextInput x="318" y="315"/>
 	<mx:TextInput x="319" y="345"/>
-	<mx:Button x="19" y="404" label="增加"/>
+	<mx:Button x="19" y="404" label="增加" click="loadAccounts()"/>
 	<mx:Button x="111" y="404" label="修改"/>
 	<mx:Button x="206" y="404" label="删除"/>
 	<mx:Label x="25" y="285" text="用户名：" width="57"/>
