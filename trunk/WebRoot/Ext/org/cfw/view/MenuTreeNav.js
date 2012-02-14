@@ -14,7 +14,7 @@ Ext.define('cfw.view.ui.MenuTreeNav', {
 			items : [ {
 				xtype : 'tabpanel',
 				id : 'tabpanel',
-				activeTab : 0,
+				activeTab: 9,
 				region : 'center',
 				html : html
 			}, {

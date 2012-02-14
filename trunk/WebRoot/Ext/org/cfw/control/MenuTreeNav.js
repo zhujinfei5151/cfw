@@ -18,7 +18,12 @@ function init() {
 	
 	//自动加载欢迎页面
 	var tabpanel = Ext.getCmp('tabpanel');
-	var tab = tabpanel.add({
+	var tab = Ext.create('Ext.tab.Tab',{
+		title : '隐藏',
+		hidden : true
+	});
+	tabpanel.add(tab);
+	tab = tabpanel.add({
 		title : '欢迎',
 		url : WELCOME_URL,
 		listeners : {
@@ -31,13 +36,18 @@ function init() {
 function onItemClick(view, record){
 	var tabpanel = Ext.getCmp('tabpanel');
 	tabpanel.removeAll();
-	var tab = tabpanel.add({
-		title : record.raw.text,
-		url : record.raw.url,
-		listeners : {
-			'activate' : onActive
-		}
+
+	var tab = Ext.create('Ext.tab.Tab',{
+		title : '隐藏',
+		hidden : true
 	});
+	tabpanel.add(tab);
+	tab = Ext.create('Ext.tab.Tab',{
+		title : record.raw.text,
+		url : record.raw.url
+	});
+	tab.addListener('activate', onActive);
+	tabpanel.add(tab);
 	tabpanel.setActiveTab(tab);
 }
 
