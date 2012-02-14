@@ -23,8 +23,14 @@ function init() {
 
 function loadtab(tabs) {
 	var tabpanel = Ext.getCmp('tabpanel');
+	var tab = Ext.create('Ext.tab.Tab',{
+		title : '隐藏',
+		hidden : true
+	});
+	tabpanel.add(tab);
 	if (!Ext.isEmpty(tabs) && tabs.length > 0) {
 		var length = tabs.length;
+		var tabActived = false;
 		for ( var i = 0; i < length; i++) {
 			var tab = tabs[i].data;
 			// 模块菜单
@@ -40,7 +46,11 @@ function loadtab(tabs) {
 
 			if(tab.active == '1') {
 				tabpanel.setActiveTab(curTab);
+				tabActived = true;
 			}
+		}
+		if(!tabActived) {//激活首个tab页
+			tabpanel.setActiveTab(1);
 		}
 	} else {
 		tabPanel.add({id:'welcome', title: '欢迎'});
