@@ -1,2 +1,4 @@
 v 0.0.3
 1. 增加mybatis分页处理插件，支持多种数据库
+2. ExtJs增加绿色主题皮肤
+3. 解决Ext.tab.Panel增加第一个Tab时，防止触发两次active事件的BUG
