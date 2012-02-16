@@ -57,7 +57,7 @@ public class AccountServiceImpl implements AccountService {
         example.setPage(page);
 
         page.setRoot(sysAccountMapper.selectByPage(example));
-        page.setTotalProperty(sysAccountMapper.countByExample(example));
+        page.setTotalProperty(example.getPage().getTotalProperty());
         return page;
     }
 
