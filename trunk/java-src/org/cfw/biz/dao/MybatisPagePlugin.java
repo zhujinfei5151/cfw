@@ -58,8 +58,10 @@ public class MybatisPagePlugin implements Interceptor {
                     String sql = boundSql.getSql();
                     String countSql = generateCountSql(sql); // 记录统计
                     PreparedStatement countStmt = connection.prepareStatement(countSql);
-                    BoundSql countBS = new BoundSql(mappedStatement.getConfiguration(), countSql,
-                                                    boundSql.getParameterMappings(), parameterObject);
+                    BoundSql countBS = mappedStatement.getBoundSql(parameterObject);// 修正使用example传参分页失败的问题
+                    // BoundSql countBS = new
+                    // BoundSql(mappedStatement.getConfiguration(),countSql,boundSql.getParameterMappings(),
+                    // parameterObject);
                     setParameters(countStmt, mappedStatement, countBS, parameterObject);
                     ResultSet rs = countStmt.executeQuery();
                     int count = 0;
@@ -103,6 +105,7 @@ public class MybatisPagePlugin implements Interceptor {
      */
     private void setParameters(PreparedStatement ps, MappedStatement mappedStatement, BoundSql boundSql,
                                Object parameterObject) throws SQLException {
+
         ErrorContext.instance().activity("setting parameters").object(mappedStatement.getParameterMap().getId());
         List<ParameterMapping> parameterMappings = boundSql.getParameterMappings();
         if (parameterMappings != null) {
